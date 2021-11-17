@@ -1,0 +1,2 @@
+module Customer::AdressesHelper
+end
