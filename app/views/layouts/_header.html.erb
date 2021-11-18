@@ -1,13 +1,11 @@
 <header>
-    <nav class="nav navbar-nav navbar-left title">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
       <% if admin_signed_in? %>
-      <%= link_to "NaganoCAKE", admin_arders_path, class: "fas fa-birthday-cake" %> <!-- あとでトップパスに変更-->
+      <%= link_to "NaganoCAKE", admin_orders_path, class: "fas fa-birthday-cake" %> <!-- あとでトップパスに変更-->
       <% else %>
       <%= link_to "NaganoCAKE", root_path, class: "fas fa-birthday-cake" %>
       <% end %>
-    </nav>
-    <nav>
-      <ul class="nav navbar-nav navbar-right">
         <% if customer_signed_in? %>
 
           <!--カスタマーがログインしている時 -->
