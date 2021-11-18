@@ -1,0 +1,69 @@
+<header>
+    <nav class="nav navbar-nav navbar-left title">
+      <% if admin_signed_in? %>
+      <%= link_to "NaganoCAKE", admin_arders_path, class: "fas fa-birthday-cake" %> <!-- あとでトップパスに変更-->
+      <% else %>
+      <%= link_to "NaganoCAKE", root_path, class: "fas fa-birthday-cake" %>
+      <% end %>
+    </nav>
+    <nav>
+      <ul class="nav navbar-nav navbar-right">
+        <% if customer_signed_in? %>
+
+          <!--カスタマーがログインしている時 -->
+          <li class="header-name">
+            ようこそ、名前さん！ <!--ようこそ、full_name(current_customer) さん！に変更-->
+          </li>
+          <li>
+            <%= link_to "マイページ", customer_path(current_customer), class: "header_btn glyphicon glyphicon-home" %>
+          </li>
+          <li>
+            <%= link_to "商品一覧", items_path, class: "header_btn glyphicon glyphicon-briefcase" %>
+          </li>
+          <!--後でカート機能追加-->
+    
+          <li>
+            <%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class: "header_btn glyphicon glyphicon-log-out" %>
+          </li>
+
+        <% elsif admin_signed_in? %>
+
+          <!-- 管理者がログインしている時 -->
+          <li>
+            <%= link_to "商品一覧", admin_items_path, class: "header_btn glyphicon glyphicon-briefcase" %>
+          </li>
+          <li>
+            <%= link_to "会員一覧", admin_customers_path, class: "header_btn glyphicon glyphicon-user"  %>
+          </li>
+          <li>
+            <%= link_to "注文履歴一覧", admin_orders_path, class: "header_btn glyphicon glyphicon-list-alt" %>
+          </li>
+          <li>
+            <%= link_to "ジャンル一覧", admin_genres_path, class: "header_btn glyphicon glyphicon-th-list" %>
+          </li>
+          <li>
+            <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "header_btn glyphicon glyphicon-log-out" %>
+          </li>
+
+          <%= render "layouts/search" %>
+        <% else %>
+
+          <!-- ログインしていない時 -->
+          <li>
+            <%= link_to "商品一覧", items_path, class: "header_btn glyphicon glyphicon-briefcase" %>
+          </li>
+          <li>
+            <%= link_to "新規登録", new_customer_registration_path, data: {"turbolinks" => false}, class: "header_btn glyphicon glyphicon-edit" %>
+          </li>
+          <li>
+            <%= link_to "ログイン", new_customer_session_path, class: "header_btn glyphicon glyphicon-log-in" %>
+          </li>
+
+          <!-- 最後の消す -->
+          <!-- <li> -->
+            <%# <%= link_to "adminログイン", new_admin_session_path %>
+          <!-- </li> -->
+        <% end %>
+      </ul>
+    </nav>
+</header>
