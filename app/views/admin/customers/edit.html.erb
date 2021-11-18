@@ -1,2 +1,65 @@
-<h1>Admin::Customers#edit</h1>
-<p>Find me in app/views/admin/customers/edit.html.erb</p>
+<div class=“row”>
+	<div class = "body" style>
+		<div class = "container">
+			<h2><%= @customer.first_name %><%= @customer.last_name %>さんの会員情報編集</h2>
+
+				<%= form_with(model: @customer, local: true ,method: :patch) do |f| %>
+				<div class="field">
+	              <%= f.label :会員ID %><br>
+	                <%= @customer.id %>
+	              </div>
+
+				<div class="field">
+				    <%= f.label :名前 %><br>
+				    <%= f.label :（姓） %>
+				    <%= f.text_field :first_name, autofocus: true, autocomplete: "email" %>
+				    <%= f.label :（名） %>
+				    <%= f.text_field :last_name, autofocus: true, autocomplete: "email" %>
+				 </div>
+
+				 <div class="field">
+				    <%= f.label :フリガナ %><br />
+				    <%= f.label :（セイ） %>
+				    <%= f.text_field :first_name_kana, autofocus: true, autocomplete: "email" %>
+				    <%= f.label :（メイ） %>
+				    <%= f.text_field :last_name_kana, autofocus: true, autocomplete: "email" %>
+				 </div>
+
+				 <div class="field">
+				    <%= f.label :郵便番号（ハイフンなし） %><br />
+				    <%= f.text_field :postal_code, autofocus: true, autocomplete: "email" %>
+				 </div>
+
+				 <div class="field">
+				    <%= f.label :住所 %><br />
+				    <%= f.text_field :street_address, autofocus: true, autocomplete: "email" %>
+				 </div>
+
+				 <div class="field">
+				    <%= f.label :電話番号（ハイフンなし） %><br />
+				    <%= f.text_field :phone_number, autofocus: true, autocomplete: "email" %>
+
+				 <div class="field">
+				    <%= f.label :メールアドレス %><br />
+				    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+				 </div>
+
+				 <div class="field">
+
+				    <%= f.label :会員ステータス %><br>
+				     <% if @customer.is_active == true %>
+				    	<label><%= f.radio_button :deleted_at,  {value: ""}, {checked: true} %>有効</label>
+				 		<label><%= f.radio_button :deleted_at, value: Time.now %>退会</label>
+				 	<% else %>
+				 		<label><%= f.radio_button :deleted_at,  value: "" %>有効</label>
+				 		<label><%= f.radio_button :deleted_at, {value: Time.now}, {checked: true} %>退会</label>
+				 	<% end %>
+				 </div>
+
+				    <%= f.submit "編集内容を保存する", class: "btn btn-primary"%>
+
+				 </div>
+			<% end %>
+		</div>
+	</div>
+</div>
