@@ -12,16 +12,14 @@
 
   </head>
 
-  <body id="wrapper">
-    <div id="header">
-      <%= render "layouts/header" %>
-    </div>
-    <div class="container">
-      <div id="flash">
-        <%= render "layouts/flash" %>
-      </div>
+  <body>
+    <%= render "layouts/header" %>
+      <main>
+        <div id="flash">
+          <%= render "layouts/flash" %>
+        </div>
     <%= yield %>
-    </div>
+      </main>
     <%= render "layouts/footer" %>
   </body>
 </html>
