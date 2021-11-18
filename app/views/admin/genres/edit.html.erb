@@ -1,16 +1,16 @@
-<h2 class="head-line title_h2 text-center" >ジャンル編集</h2>
+<div class="container">
+  <h2 class="head-line title_h2 text-center" >ジャンル編集</h2>
+  <div class="row">
 
-  <% if @genre.errors.any? %>
-    <%= render "layouts/error_messages", resource: @genre %>
-  <% end %>
-  <%= form_for @genre, :url => {:action => :update} do |f| %>
-  <div>
-    ジャンル
-      <%= f.text_field :name  %>
-      <%= f.submit "変更を保存する", class: "btn btn-info" %>
+    <% if @genre.errors.any? %>
+      <%= render "layouts/error_messages", resource: @genre %>
+    <% end %>
+    <%= form_for @genre, :url => {:action => :update} do |f| %>
+    <div>
+      ジャンル
+        <%= f.text_field :name  %>
+        <%= f.submit "変更を保存する", class: "btn btn-info" %>
+    </div>
+    <% end %>
   </div>
-  <% end %>
-<br>
-  <div class="col-xs-12">
-    <%= link_to "戻る", admin_genres_path, class: "glyphicon glyphicon-home btn btn-info" %>
-  </div>
+</div>
