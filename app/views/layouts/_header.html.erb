@@ -1,11 +1,15 @@
 <header>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
-      <% if admin_signed_in? %>
-      <%= link_to "NaganoCAKE", admin_orders_path, class: "fas fa-birthday-cake" %> <!-- あとでトップパスに変更-->
-      <% else %>
-      <%= link_to "NaganoCAKE", root_path, class: "fas fa-birthday-cake" %>
-      <% end %>
+      <a class="navbar-brand">
+        <% if admin_signed_in? %>
+        <%= link_to "NaganoCAKE", admin_orders_path, class: "fas fa-birthday-cake text-light" %> <!-- あとでトップパスに変更-->
+        <% else %>
+        <%= link_to "NaganoCAKE", root_path, class: "fas fa-birthday-cake text-light" %>
+        <% end %>
+      </a>
+      <div class="collapse navbar-collapse">
+        <ul class="navbar-nav ml-auto">
         <% if customer_signed_in? %>
 
           <!--カスタマーがログインしている時 -->
@@ -13,34 +17,34 @@
             ようこそ、名前さん！ <!--ようこそ、full_name(current_customer) さん！に変更-->
           </li>
           <li>
-            <%= link_to "マイページ", customer_path(current_customer), class: "header_btn glyphicon glyphicon-home" %>
+            <%= link_to "マイページ", customer_path(current_customer), class: "fas fa-home nav-link text-light" %>
           </li>
           <li>
-            <%= link_to "商品一覧", items_path, class: "header_btn glyphicon glyphicon-briefcase" %>
+            <%= link_to "商品一覧", items_path, class: "fas fa-briefcase nav-link text-light" %>
           </li>
           <!--後でカート機能追加-->
     
           <li>
-            <%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class: "header_btn glyphicon glyphicon-log-out" %>
+            <%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class: "fas fa-sign-out-alt nav-link text-light" %>
           </li>
 
         <% elsif admin_signed_in? %>
 
           <!-- 管理者がログインしている時 -->
           <li>
-            <%= link_to "商品一覧", admin_items_path, class: "header_btn glyphicon glyphicon-briefcase" %>
+            <%= link_to "商品一覧", admin_items_path, class: "fas fa-briefcase nav-link text-light" %>
           </li>
           <li>
-            <%= link_to "会員一覧", admin_customers_path, class: "header_btn glyphicon glyphicon-user"  %>
+            <%= link_to "会員一覧", admin_customers_path, class: "fas fa-user nav-link text-light"  %>
           </li>
           <li>
-            <%= link_to "注文履歴一覧", admin_orders_path, class: "header_btn glyphicon glyphicon-list-alt" %>
+            <%= link_to "注文履歴一覧", admin_orders_path, class: "fas fa-list-alt nav-link text-light" %>
           </li>
           <li>
-            <%= link_to "ジャンル一覧", admin_genres_path, class: "header_btn glyphicon glyphicon-th-list" %>
+            <%= link_to "ジャンル一覧", admin_genres_path, class: "fas fa-th-list nav-link text-light" %>
           </li>
           <li>
-            <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "header_btn glyphicon glyphicon-log-out" %>
+            <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "fas fa-sign-out-alt nav-link text-light" %>
           </li>
 
           <%= render "layouts/search" %>
@@ -48,20 +52,17 @@
 
           <!-- ログインしていない時 -->
           <li>
-            <%= link_to "商品一覧", items_path, class: "header_btn glyphicon glyphicon-briefcase" %>
+            <%= link_to "商品一覧", items_path, class: "fas fa-briefcase nav-link text-light" %>
           </li>
           <li>
-            <%= link_to "新規登録", new_customer_registration_path, data: {"turbolinks" => false}, class: "header_btn glyphicon glyphicon-edit" %>
+            <%= link_to "新規登録", new_customer_registration_path, data: {"turbolinks" => false}, class: "fas fa-edit nav-link text-light" %>
           </li>
           <li>
-            <%= link_to "ログイン", new_customer_session_path, class: "header_btn glyphicon glyphicon-log-in" %>
+            <%= link_to "ログイン", new_customer_session_path, class: "fas fa-sign-in-alt nav-link text-light" %>
           </li>
-
-          <!-- 最後の消す -->
-          <!-- <li> -->
-            <%# <%= link_to "adminログイン", new_admin_session_path %>
-          <!-- </li> -->
         <% end %>
-      </ul>
-    </nav>
+        </ul>
+      </div>
+    </div>
+  </nav>
 </header>
