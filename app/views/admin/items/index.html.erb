@@ -1,5 +1,5 @@
 <h2>商品一覧</h2>
-<%= link_to "", new_admin_item_path, class: "col-xs-1 col-xs-offset-11 btn btn-default glyphicon glyphicon-plus" %>
+<%= link_to "新規登録", new_admin_item_path, class: "col-xs-1 col-xs-offset-11 btn btn-default glyphicon glyphicon-plus" %>
 <table class="table table-hover table-inverse">
 	<thead>
 		<tr>
@@ -13,8 +13,8 @@
 	<tbody>
 		<% @items.each do |item| %>
 			<tr>
-				<th><%= product.id %></th>
-				<th><%= link_to item.name, admins_item_path(item) %></th>
+				<th><%= item.id %></th>
+				<th><%= link_to item.name, admin_items_path(item) %></th>
 				<th><%= item.price %></th>
 				<th><%= item.genre.name %></th>
 				<th><% if item.is_active == true %>
