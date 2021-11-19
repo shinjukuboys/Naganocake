@@ -2,9 +2,10 @@ class Item < ApplicationRecord
   belongs_to :genre
   attachment :image_id
 
-  validates :image, presence: true
+  validates :image_id, presence: true
   validates :name, presence: true
   validates :introduction, presence: true
+  validates :genre_id, presence: true
   # 値段設定時、半角数字のみ登録可能にするバリデーション
   validates :price, presence: true, format: {
     with: /\A[0-9]+\z/i,
