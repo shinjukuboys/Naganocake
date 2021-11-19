@@ -1,15 +1,10 @@
 class Item < ApplicationRecord
   belongs_to :genre
   attachment :image_id
-
-  validates :image_id, presence: true
-  validates :name, presence: true
-  validates :introduction, presence: true
-  validates :genre_id, presence: true
-  # 値段設定時、半角数字のみ登録可能にするバリデーション
-  validates :price, presence: true, format: {
-    with: /\A[0-9]+\z/i,
-  }
+  
+  validates :genre_id, :name, :tax_out_price, presence: true
+	validates :explanation, length: {maximum: 200}
+	validates :tax_out_price, numericality: { only_integer: true }
 
   def self.search(word)
     Product.where("name LIKE?", "%#{word}%")
