@@ -1,5 +1,5 @@
 <div class ="container">
-  <h2 class="head-line title_h2 text-center">商品詳細</h2>
+  <h2>商品詳細</h2>
   <div class="row">
 	  <div class="col-xs-6 mx-auto">
 	      <div id="img_field">
@@ -22,7 +22,7 @@
 	      </div>
 	      <div class="field">
 					<p>
-						税込価格　　　　￥<%= (@item.price * 1.1).to_i %>
+						税込価格￥<%= (@item.price * 1.1).to_i %>
 	        								(<%= @item.price.to_s(:delimited) %>) 円<br>
 						(税抜価格)
 					</p><br>
