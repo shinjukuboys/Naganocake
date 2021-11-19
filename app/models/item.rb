@@ -1,6 +1,6 @@
 class Item < ApplicationRecord
   belongs_to :genre
-  attachment :image_id
+  attachment :image
 
   validates :genre_id, :name, :price, presence: true
 	validates :introduction, length: {maximum: 200}
