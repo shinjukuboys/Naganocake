@@ -5,7 +5,6 @@ class Item < ApplicationRecord
   validates :image, presence: true
   validates :name, presence: true
   validates :introduction, presence: true
-  validates :genre_id, presence: true
   # 値段設定時、半角数字のみ登録可能にするバリデーション
   validates :price, presence: true, format: {
     with: /\A[0-9]+\z/i,
