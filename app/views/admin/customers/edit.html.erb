@@ -3,7 +3,7 @@
 		<div class = "container">
 			<h2><%= @customer.first_name %><%= @customer.last_name %>さんの会員情報編集</h2>
 
-				<%= form_with(model: @customer, local: true ,method: :patch) do |f| %>
+				<%= form_with(model: @customer, url: admin_customer_path(@customer) ,local: true ,method: :patch) do |f| %>
 				<div class="field">
 	              <%= f.label :会員ID %><br>
 	                <%= @customer.id %>
@@ -32,12 +32,12 @@
 
 				 <div class="field">
 				    <%= f.label :住所 %><br />
-				    <%= f.text_field :street_address, autofocus: true, autocomplete: "email" %>
+				    <%= f.text_field :address, autofocus: true, autocomplete: "email" %>
 				 </div>
 
 				 <div class="field">
 				    <%= f.label :電話番号（ハイフンなし） %><br />
-				    <%= f.text_field :phone_number, autofocus: true, autocomplete: "email" %>
+				    <%= f.text_field :telephone_number, autofocus: true, autocomplete: "email" %>
 
 				 <div class="field">
 				    <%= f.label :メールアドレス %><br />
@@ -46,14 +46,12 @@
 
 				 <div class="field">
 
-				    <%= f.label :会員ステータス %><br>
-				     <% if @customer.is_active == true %>
-				    	<label><%= f.radio_button :deleted_at,  {value: ""}, {checked: true} %>有効</label>
-				 		<label><%= f.radio_button :deleted_at, value: Time.now %>退会</label>
-				 	<% else %>
-				 		<label><%= f.radio_button :deleted_at,  value: "" %>有効</label>
-				 		<label><%= f.radio_button :deleted_at, {value: Time.now}, {checked: true} %>退会</label>
-				 	<% end %>
+			      <div class="form-group col-xs-9">
+        <%= f.label :"会員ステータス", class: "col-sm-4 control-label" %>
+        　<%= f.radio_button :is_active, true %>
+        　<%= f.label :is_active, "有効", {value: :true, style: "display: inline-block;"} %>
+        　<%= f.radio_button :is_active, false %>
+        　<%= f.label :is_active, "退会", {value: :false, style: "display: inline-block;"} %>
 				 </div>
 
 				    <%=  "編集内容を保存する", class: "btn btn-primary"%>
