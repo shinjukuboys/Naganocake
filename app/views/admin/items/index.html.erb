@@ -13,8 +13,8 @@
 	<tbody>
 		<% @items.each do |item| %>
 			<tr>
-				<th><%= product.id %></th>
-				<th><%= link_to item.name, admins_item_path(item) %></th>
+				<th><%= item.id %></th>
+				<th><%= link_to item.name, admin_item_path(item) %></th>
 				<th><%= item.price %></th>
 				<th><%= item.genre.name %></th>
 				<th><% if item.is_active == true %>

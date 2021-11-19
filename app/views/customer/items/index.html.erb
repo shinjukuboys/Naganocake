@@ -6,12 +6,12 @@
                 <table class="table">
                     <tr>
                         <th><%= link_to item_path(item) do %>
-                            <%= attachment_image_tag(item, :image,size: "180x130", fallback: "no_image.jpg") %>
+                          <h1>アタッチメントの画像挿入の記述</h1>
                             <% end %>
                         </th>
                     </tr>
                     <tr>
-                        <th><%= link_to item.name, item_path(product) %></th>
+                        <th><%= link_to item.name, item_path(item) %></th>
                     </tr>
                     <tr>
                         <th>￥<%= (item.price * 1.1).to_i %></th>

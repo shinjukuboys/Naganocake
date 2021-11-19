@@ -1,6 +1,6 @@
 class Customer::ItemsController < ApplicationController
   def index
-    @items = @items_all
+    @items = Item.all
 
   end
 
