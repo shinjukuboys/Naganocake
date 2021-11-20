@@ -1,9 +1,7 @@
-class Customer::AdressesController < ApplicationController
-  
-  before_action :authenticate_customer!
+class Customer::AddressesController < ApplicationController
   
   def index
-    @addresses = current_customer.address
+    @addresses = Address.all
     @address = Address.new
   end
 
@@ -22,7 +20,6 @@ class Customer::AdressesController < ApplicationController
   def destroy
     @address = Address.find(params[:id])
 	  @address.destroy
-    @addresses = current_customer.address
     flash.now[:alert] = "配送先を削除しました"
 	  redirect_to addresses_path
   end
