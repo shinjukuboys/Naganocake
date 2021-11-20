@@ -2,7 +2,7 @@
 <div class ="container">
   <div class ="row">
     <div class="actions">
-      <%#= form_with model: @item, url: admin_item_path, local: true do |f| %>
+      <%= form_with model: @item, url: admin_item_path, local: true do |f| %>
         <div class="img_field">
           <%= f.label "商品画像", class: "col-sm-3 control-label" %>
           <%= f.attachment_field :image, class: "image" %>
