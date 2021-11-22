@@ -21,14 +21,29 @@
       <tbody>
         <% @cart_items.each do |cart_item| %>
   			  <tr id="cart-<%= cart_item.id %>">
-  			  <%= cart_item.id %>
-          </tr>
+  			   <td class="text-left">
+              <%= attachment_image_tag( cart_item.item, :image, size: "55x43", fallback: "no_image.jpg") %>
+              <%= cart_item.item.name %>
+            </td>
+            <td><%= (cart_item.item.price * 1.1).to_s %></td>
+            <td>
+              <%= form_with model: cart_item, url: cart_item_path(cart_item), method: :patch, local: true do |f| %>
+                <%= f.number_field :amount, class: "amount", size: 10, min: 1, id: "quantity_cart" %>
+                <%= f.submit "変更", class: "btn btn-info" %>
+              <% end %>
+            </td>
+            <td class="text-right" id='sub_price-<%= cart_item.id %>'>
+              ¥<%= (cart_item.item.price * 1.1).to_s %>
+            </td>
+            <td>
+              <%= link_to " 削除する", cart_item_path(cart_item), method: :delete, remote: true, data: {confirm: "#{cart_item.item.name}を削除してよろしいですか？"}, class: "glyphicon glyphicon-trash btn btn-danger" %>
+            </td>
+            </tr>
         <% end %>
       </tbody>
     </table>
     <div class="col-xs-9 margin-bottom">
       <div class ="action">
-        <%= link_to " 買い物を続ける", items_path, class: "glyphicon glyphicon-shopping-cart btn btn-info" %>
       </div>
     </div>
 
@@ -36,9 +51,10 @@
       <table class="table table-bordered text-right">
         <thead>
           <tr>
+
             <td class="warning">合計金額</td>
             <td class="text-right" id='total_price'>
-              ¥<%#= @cart_item.price.to_s(:delimited) %>
+              ¥<%= total_price(@cart_items).to_s(:delimited) %>
             </td>
           </tr>
         </thead>
@@ -52,3 +68,5 @@
     <% end %>
   </div>
 </div>
+
+
