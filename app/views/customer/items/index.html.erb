@@ -1,23 +1,19 @@
-<div class="row login-row">
-    <div class="col-xs-9">
-        <h2>商品一覧 （全XX件）＃要編集</h2>
+<div class="container" style="font-family: 'Noto Sans JP',serif; margin: 150px;">
+  <div class='row pb-5 pt-2'>
+    <div class="col-md-10">
+      <h2>商品一覧 （全XX件）＃要編集</h2>
+       <div class="item-box">
         <% @items.each do |item| %>
-            <div class="product-box">
-                <table class="table">
-                    <tr>
-                        <th><%= link_to item_path(item) do %>
-                          <h1>アタッチメントの画像挿入の記述</h1>
-                            <% end %>
-                        </th>
-                    </tr>
-                    <tr>
-                        <th><%= link_to item.name, item_path(item) %></th>
-                    </tr>
-                    <tr>
-                        <th>￥<%= (item.price * 1.1).to_i %></th>
-                    </tr>
-                </table>
-            </div>
+         <div class="col-lg-3 col-md-3 mb-3">
+           <%= link_to item_path(item) do %>
+           <%= attachment_image_tag(@item, :image, class: 'index-image', size: "340x220", fallback: "no_image.jpg" ) %>
+           <% end %>
+           <div class="text-left">商品名</div> 
+           <%= link_to item.name, item_path(item) %><br>
+           ￥<%= (item.price * 1.1).to_i %>
+          </div>
         <% end %>
-    </div>
-</div>
+       </div>
+     </div>
+   </div>
+ </div>
