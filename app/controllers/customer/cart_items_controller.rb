@@ -18,12 +18,12 @@ class Customer::CartItemsController < ApplicationController
     @cart_item = current_customer.cart_items.new(params_cart_item)
 
       # カートの中に同じ商品が重複しないようにして　古い商品と新しい商品の数量を合わせる
-    @update_cart_item =  CartItem.find_by(item: @cart_item.item)
+    @update_cart_item =  CartItem.find_by(item_id: @cart_item.item.id)
     if @update_cart_item.present?
       @cart_item.amount += @update_cart_item.amount
       @update_cart_item.destroy
     end
-    if @cart_item.save
+    if @cart_item.save!
       flash[:notice] = "#{@cart_item.item.name}をカートに追加しました"
       redirect_to items_path
     else
@@ -56,6 +56,6 @@ class Customer::CartItemsController < ApplicationController
   private
 
   def params_cart_item
-    params.require(:cart_item).permit(:amount, :item_id)
+    params.require(:cart_item).permit(:customer_id, :amount, :item_id)
   end
 end
