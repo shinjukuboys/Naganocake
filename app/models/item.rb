@@ -10,4 +10,8 @@ class Item < ApplicationRecord
   def self.search(word)
     Product.where("name LIKE?", "%#{word}%")
   end
+  
+  def taxin_price
+    price * 1.1
+  end
 end

@@ -7,9 +7,9 @@ class Customer::CartItemsController < ApplicationController
   end
 
   def update
-    @cart_product = CartProduct.find(params[:id])
-    @cart_product.update(cart_product_params)
-    redirect_to cart_products_path, notice: "個数の変更が完了しました"
+    @cart_item = CartItem.find(params[:id])
+    @cart_item.update(cart_item_params)
+    redirect_to cart_items_path, notice: "個数の変更が完了しました"
   end
 
   def create
