@@ -1,2 +1,47 @@
-<h1>Customer::CartItems#index</h1>
-<p>Find me in app/views/customer/cart_items/index.html.erb</p>
+<div class="row login-row">
+	<h2>ショッピングカート</h2>
+	<%= #button_to 'カートを空にする', @cart_items, method: :delete, data: {confirm: 'カートを空にして本当によろしいですか？'}, class: "btn btn-danger destroy-all" %>
+	<div class="row">
+		<table class="table table-bordered cart-table">
+			<thead class="thead-light">
+				<tr style="background-color:#F5F5F5;">
+					<th>商品名</th>
+					<th>単価(税込)</th>
+					<th>数量</th>
+					<th>小計</th>
+					<th>&nbsp;</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% #@cart_items.each do |cart_items| %>
+				<tr>
+					<td><%= cart_items.item.name %></td>
+					<td><%= (cart_items.item.price * 1.1).to_i %></td>
+					<td>
+						<%= form_with model: cart_items, url: cart_items_path(id: cart_items.id), method: :patch, local: true do |f| %>
+							<%= f.number_field :quantity, min: 1, max: 100 %>
+							<%= f.submit "変更" %>
+						<% end %>
+					</td>
+					<td><%= (Items.find(inside_cart.product_id).price * 1.1 * cart_items.quantity).to_i  %></td>
+					<td><%= link_to "削除する", cart_items_path(id: inside_cart.id), method: :delete, class: "btn btn-danger"  %></td>
+				</tr>
+				<% end %>
+			</tbody>
+		</table>
+		<table class="table table-bordere">
+			<tr>
+				<th>合計金額</th>
+				<td><%= #@sum %></td>
+			</tr>
+		</table>
+	</div>
+	<%= link_to "買い物を続ける", root_path, class: "btn btn-primary" %>
+	<div>
+		<% if #@cart_items.count == 0  %>
+			<%= link_to "情報入力に進む", inside_carts_path, class: "btn btn-success go-to-order" %>
+		<% else %>
+			<%= link_to "情報入力に進む", new_order_path, class: "btn btn-success go-to-order" %>
+		<% end %>
+	</div>
+</div>
