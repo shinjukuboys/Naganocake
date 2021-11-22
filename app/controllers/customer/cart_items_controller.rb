@@ -1,8 +1,8 @@
 class Customer::CartItemsController < ApplicationController
   before_action :authenticate_customer!
-  
+
   def index
-    @cart_items = current_cart
+   @cart_items = current_customer.cart_items.all
   end
 
   def update
@@ -31,7 +31,7 @@ class Customer::CartItemsController < ApplicationController
       @cart_item = CartItem.new
       flash[:alert] = "個数を選択してください"
       render ("customer/items/show")
-    end  
+    end
   end
 
   def destroy
@@ -52,9 +52,9 @@ class Customer::CartItemsController < ApplicationController
     flash[:alert] = "カートの商品を全て削除しました"
     redirect_to customers_cart_items_path
   end
-  
+
   private
-  
+
   def params_cart_item
     params.require(:cart_item).permit(:amount, :item_id)
   end
