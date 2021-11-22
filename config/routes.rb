@@ -11,7 +11,7 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
   sessions: "admin/sessions"
 }
   scope module: :customer do
-    resources:adresses, only: [:index, :create, :destroy, :edit, :update]
+    resources:addresses, only: [:index, :create, :destroy, :edit, :update]
     resources:orders, only: [:index, :new, :create, :show]
     post 'orders/check' => "orders#check"
     get 'orders/thanks' => "orders#thanks"
