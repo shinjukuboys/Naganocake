@@ -9,18 +9,18 @@ class Customer::OrdersController < ApplicationController
     @order.customer_id = current_customer.id #注文情報に自分のIDを入れる
     @order.postage = 800 #送料を設定する
     @cart_items = current_customer.cart_items #自分のカート内商品を取り出す
-    @total_payment = @order.postage + @cart_items.items_of_price #請求額の合計を割り出す
+    #@total_payment = @order.postage + @cart_items.sum_of_price #請求額の合計を割り出す
 
-    if params[:order][:address] == "0" #お届けの方法が自分の住所の時
+    if params[:order][:addresses] == "0" #お届けの方法が自分の住所の時
       @address_name = current_customer.last_name + current_customer.first_name
       @address_postal_cord = current_customer.postal_cord
       @address_address = current_customer.address
-    elsif params[:order][:address] == "1" #お届けの方法が登録している住所の時
+    elsif params[:order][:addresses] == "1" #お届けの方法が登録している住所の時
       @customer_address = Shipping.find(params[:order][:shipping_id])
       @address_name = @customer_address.name
       @address_postal_cord = @customer_address.postal_cord
       @address_address = @customer_address.address
-    elsif  params[:order][:address] == "2" #新しいお届け先
+    elsif  params[:order][:addresses] == "2" #新しいお届け先
       @address_name = @order.shipping_name
       @address_postal_cord = @order.shipping_postal_cord
       @address_address = @order.shipping_address
