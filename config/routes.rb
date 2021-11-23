@@ -14,8 +14,8 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
     resources:addresses, only: [:index, :create, :destroy, :edit, :update]
     resources:orders, only: [:index, :new, :create, :show]do
       collection do
-        post 'orders/check' => "orders#check"
-        get 'orders/thanks' => "orders#thanks"
+        post :check
+        get :thanks
       end
     end
     resources:cart_items, only: [:index, :create, :destroy, :update]

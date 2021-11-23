@@ -2,7 +2,7 @@
 <h2>注文情報入力</h2>
 
 <p>支払い方法</p>
-<%= form_with model: @order,url: orders_check_orders_path, method: :post, local: true do |f| %>
+<%= form_with model: @order,url: check_orders_path, method: :post, local: true do |f| %>
 <%= f.radio_button :payment_method, "credit_card" %>
 <%= f.label :payment_method, "クレジットカード" %>
 
