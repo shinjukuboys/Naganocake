@@ -2,8 +2,8 @@ class Order < ApplicationRecord
   belongs_to :customer
   has_many :order_details, dependent: :destroy
   
-  validates :name, presence: true
-  validates :address, presence: true
+  #validates :name, presence: true
+  #validates :address, presence: true
   validates :postal_code, presence: true
   
   #0は入金待ち（デフォルト）、１は入金確認、２は製作中、３は発送準備中、４は発送済み
