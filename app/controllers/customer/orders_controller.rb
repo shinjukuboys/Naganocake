@@ -39,7 +39,7 @@ class Customer::OrdersController < ApplicationController
         @order_details.save
         current_customer.cart_items.destroy_all
       end
-      redirect_to orders_thanks_path
+      redirect_to orders_thanks_orders_path
     else
       @addresses = current_customer.addresses
       render :new
@@ -56,7 +56,7 @@ class Customer::OrdersController < ApplicationController
   def show
     @order = Order.find(params[:id])
   end
-  
+
   private
 
   def order_params
