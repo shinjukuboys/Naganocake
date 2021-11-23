@@ -1,2 +1,103 @@
-<h1>Customer::Orders#check</h1>
-<p>Find me in app/views/customer/orders/check.html.erb</p>
+<div class="container" style="margin-bottom: 250px;">
+  <div class="row">
+    <div class="col">
+
+      <h2>注文情報確認</h2>
+      <% @sum = 0 %>
+
+      <div class="row mt-3">
+      <div class="col-8">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>商品名</th>
+            <th>単価（税込）</th>
+            <th>数量</th>
+            <th>小計</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @cart_items.each do |cart_item| %>
+          <tr>
+            <td>
+              <%= link_to item_path(cart_item) do %>
+                <%= attachment_image_tag cart_item.item , :image, :fill,50,50 ,fallback: "no_image.jpg",size: "50x50" %>
+                <%= cart_item.item.name %>
+              <% end %>
+            </td>
+            <td>
+              <% @item_price = cart_item.item.price * 1.1 %>
+              ¥<%= @item_price.floor.to_s(:delimited) %>
+            </td>
+            <td>
+              <%= cart_item.amount %>
+            </td>
+            <td>
+              <% @total_price = @item_price * cart_item.amount %>
+              ¥<%= @total_price.floor.to_s(:delimited) %>
+            </td>
+          </tr>
+          <% @sum += @total_price %>
+          <% end %>
+        </tbody>
+      </table>
+      </div>
+
+      <div class="col-4">
+      <table class="table table-bordered">
+        <tbody>
+          <tr>
+            <th>送料</th>
+            <td><%= @order.postage %></td>
+          </tr>
+          <tr>
+            <th>商品合計</th>
+            <td><%= @sum.floor.to_s(:delimited) %></td>
+          </tr>
+          <tr>
+            <th>請求金額</th>
+            <td><%#= @total_payment.floor.to_s(:delimited) %>?</td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+      </div>
+
+      <div class="row">
+        <h3 class="mr-3">支払い方法</h3>
+        <p style="font-size: 20px;"><%= @order.payment_method %></p>
+      </div>
+      <div class="row">
+        <h3 class="mr-3">お届け先</h3>
+        〒<p style="font-size: 20px;"><%= @postal_cord %></p>　<p style="font-size: 20px;"><%= @address %></p>　<p style="font-size: 20px;"><%= @name %></p>
+      </div>
+
+      <%= form_with model: @order, url: orders_path, method: :post, local: true do |f| %>
+        <%= f.hidden_field :payment_method, value: @order.payment_method %>
+        <%= f.hidden_field :customer_id, value: current_customer.id %>
+        <%= f.hidden_field :postage, value: 800 %>
+        <%#= f.hidden_field :total_payment, value: @total_payment %>
+        <%= f.hidden_field :name, value: @name %>
+        <%= f.hidden_field :address, value: @address %>
+        <%= f.hidden_field :postal_cord, value: @postal_cord %>
+        <!--<=% if params[:order][:delivery_address] == "0" %>-->
+        <!--  <=%= f.hidden_field :shipping_name, value: current_customer.last_name + current_customer.first_name %>-->
+        <!--  <=%= f.hidden_field :shipping_address, value: current_customer.address %>-->
+        <!--  <=%= f.hidden_field :shipping_post_cord, value: current_customer.post_cord %>-->
+        <!--<=% elsif params[:order][:delivery_address] == "1" %>-->
+        <!--  <=%= f.hidden_field :shipping_name, value: @customer_address.pluck(:name) %>-->
+        <!--  <=%= f.hidden_field :shipping_address, value: @customer_address.pluck(:address) %>-->
+        <!--  <=%= f.hidden_field :shipping_post_cord, value: @customer_address.pluck(:post_cord) %>-->
+        <!--<=% elsif params[:order][:delivery_address] == "2" %>-->
+        <!--  <=%= f.hidden_field :shipping_name, value: @order.shipping_name %>-->
+        <!--  <=%= f.hidden_field :shipping_address, value: @order.shipping_address %>-->
+        <!--  <=%= f.hidden_field :shipping_post_cord, value: @order.shipping_post_cord %>-->
+        <!--<=% end %>-->
+        <div class="text-center mt-5">
+        <%= f.submit "注文を確定する", class: "btn" ,style: "background-color: #cbb05e; color: black;" %>
+        </div>
+      <% end %>
+
+    </div>
+  </div>
+</div>

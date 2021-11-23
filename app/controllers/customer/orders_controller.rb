@@ -12,18 +12,18 @@ class Customer::OrdersController < ApplicationController
     #@total_payment = @order.postage + @cart_items.sum_of_price #請求額の合計を割り出す
 
     if params[:order][:addresses] == "0" #お届けの方法が自分の住所の時
-      @address_name = current_customer.last_name + current_customer.first_name
-      @address_postal_cord = current_customer.postal_cord
-      @address_address = current_customer.address
+      @name = current_customer.last_name + current_customer.first_name
+      @postal_cord = current_customer.postal_cord
+      @address = current_customer.address
     elsif params[:order][:addresses] == "1" #お届けの方法が登録している住所の時
       @customer_address = Shipping.find(params[:order][:shipping_id])
-      @address_name = @customer_address.name
-      @address_postal_cord = @customer_address.postal_cord
-      @address_address = @customer_address.address
+      @name = @customer_address.name
+      @postal_cord = @customer_address.postal_cord
+      @address = @customer_address.address
     elsif  params[:order][:addresses] == "2" #新しいお届け先
-      @address_name = @order.shipping_name
-      @address_postal_cord = @order.shipping_postal_cord
-      @address_address = @order.shipping_address
+      @name = @order.shipping_name
+      @postal_cord = @order.shipping_postal_cord
+      @address = @order.shipping_address
     end
   end
 
