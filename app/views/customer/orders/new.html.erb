@@ -1,2 +1,38 @@
-<h1>Customer::Orders#new</h1>
-<p>Find me in app/views/customer/orders/new.html.erb</p>
+
+<h2>注文情報入力</h2>
+
+<p>支払い方法</p>
+<%= form_with model: @order,url: orders_check_path, method: :post, local: true do |f| %>
+<%= f.radio_button :payment_method, "credit_card" %>
+<%= f.label :payment_method, "クレジットカード" %>
+
+<%= f.radio_button :payment_method, "transfer" %>
+<%= f.label :payment_method, "銀行振込" %>
+  
+
+<p>お届け先</p>
+
+<%= f.radio_button :address, 0, checked: true %>
+<%= f.label :address, "ご自身の住所", value: 0 %>
+〒<%= current_customer.postal_code %>　<%= current_customer.address %>
+<%= current_customer.last_name %><%= current_customer.first_name %>
+
+<%= f.radio_button :address, 1 %>
+<%= f.label :address, "登録済住所から選択", value: 1 %>
+<%#= f.collection_select :shipping_id, @shippings, :id, :view_address , :prompt => "選択してください" %>
+
+<%= f.radio_button :address, 2 %>
+<%= f.label :address, "新しいお届け先", value: 2 %>
+
+<%= f.label :new_address, "郵便番号（ハイフンなし）"%>
+<%= f.text_field :postal_code, :placeholder => "0000000" %>
+
+<%= f.label :new_address, "住所"%>
+<%= f.text_field :address, :placeholder => "東京都渋谷区代々木神園町０−０", :size =>"38x10"%>
+
+<%= f.label :new_address, "宛名"%>
+<%= f.text_field :name, :placeholder => "令和道子" %>
+
+<%= f.submit "確認画面に進む", class: "btn mt-5", style: "background-color: #cbb05e; color: black;" %>
+<% end %>
+
