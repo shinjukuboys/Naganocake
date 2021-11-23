@@ -1,34 +1,30 @@
-<div class="contener">
- <div class="row">
-  <div class="col-sm-12">
-			<div class = "sample">
-			 <div class="text-center">
-				  <div>イメージ画像</div>
-				  Welcome NaganoCake<br>
-				  このサイトは、ケーキ販売のECサイトになります。<br>
-				  会員でない方も商品の閲覧はできますが、<br>
-				  購入には会員登録が必要になります。<br>
-				 </div>
-			</div><br>
-
-		 <div class= "items text-center">
-		  <h2>新着商品</h2>
-     　<% @items.each do |item| %>
-        <div class="item-box">
-         <%= link_to item_path(item) do %>
-          <%= attachment_image_tag(@item, :image, size: "340x220", fallback: "no_image.jpg" ) %><br>
-         <% end %>
-          <dl>
-      		 <dt>商品名</dt>
-      			 <dd><%= link_to item.name, item_path(item) %></dd>
-      			<dt>価格</dt>
-      				<dd>¥ ￥<%= (item.price * 1.1).to_i %> </dd>
-      			</dl>
-          </div>
-        <% end %>
-         <div class= "text-right">
-         <p><%= link_to "全ての商品を見る>", items_path %></p>
-         </div>
-      </div>
+ <div class="color">
+   <div style="position: relative; display:inline-block; margin-top: 25px; margin-left: 80px;">
+    <%= image_tag 'cupcakes-1283821_1280.jpg',class:"image" %>
+    <div style="position: absolute;top: 10px; right: 35%; text-align: center; ">
+     <div class="font-layout">
+      <p>ようこそ、ながのCAKEへ！</p>
+      <p>このサイトはケーキ販売のECサイトになります。</p>
+      <p>会員でない方も商品の閲覧はできますが、</p>
+      <p>購入には会員登録が必要です。</p>
+    </div>
+   </div>
   </div>
-<div>
+
+
+
+
+<div class="container" style="font-family: 'Noto Sans JP',serif; margin: 150px;">
+ <h2>新着商品</h2>
+   <% @items.each do |item| %>
+     <div class="pic_frame">
+     <%= attachment_image_tag(@item, :image,class: 'top-image', size: "200x200", fallback: "no_image.jpg" ) %><br>
+     商品名<br><%= link_to item.name, item_path(item) %><br>
+     価格¥<%= (item.price * 1.1).to_i %>
+      </div>
+    <% end %>
+ </div>
+  <div class= "text-center">
+   <%= link_to "全ての商品を見る", items_path %>
+  </div>
+  </div>
