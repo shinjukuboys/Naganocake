@@ -69,7 +69,7 @@
       </div>
       <div class="row">
         <h3 class="mr-3">お届け先</h3>
-        〒<p style="font-size: 20px;"><%= @postal_cord %></p>　<p style="font-size: 20px;"><%= @address %></p>　<p style="font-size: 20px;"><%= @name %></p>
+        〒<p style="font-size: 20px;"><%= @postal_code %></p>　<p style="font-size: 20px;"><%= @address %></p>　<p style="font-size: 20px;"><%= @name %></p>
       </div>
 
       <%= form_with model: @order, url: orders_path, method: :post, local: true do |f| %>
@@ -79,7 +79,7 @@
         <%#= f.hidden_field :total_payment, value: @total_payment %>
         <%= f.hidden_field :name, value: @name %>
         <%= f.hidden_field :address, value: @address %>
-        <%= f.hidden_field :postal_cord, value: @postal_cord %>
+        <%= f.hidden_field :postal_code, value: @postal_code %>
         <!--<=% if params[:order][:delivery_address] == "0" %>-->
         <!--  <=%= f.hidden_field :shipping_name, value: current_customer.last_name + current_customer.first_name %>-->
         <!--  <=%= f.hidden_field :shipping_address, value: current_customer.address %>-->

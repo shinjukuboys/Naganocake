@@ -13,16 +13,16 @@ class Customer::OrdersController < ApplicationController
 
     if params[:order][:addresses] == "0" #お届けの方法が自分の住所の時
       @name = current_customer.last_name + current_customer.first_name
-      @postal_cord = current_customer.postal_cord
+      @postal_code = current_customer.postal_code
       @address = current_customer.address
     elsif params[:order][:addresses] == "1" #お届けの方法が登録している住所の時
       @customer_address = Shipping.find(params[:order][:shipping_id])
       @name = @customer_address.name
-      @postal_cord = @customer_address.postal_cord
+      @postal_code = @customer_address.postal_code
       @address = @customer_address.address
     elsif  params[:order][:addresses] == "2" #新しいお届け先
       @name = @order.shipping_name
-      @postal_cord = @order.shipping_postal_cord
+      @postal_code = @order.shipping_postal_code
       @address = @order.shipping_address
     end
   end
@@ -60,6 +60,6 @@ class Customer::OrdersController < ApplicationController
   private
 
   def order_params
-    params.require(:order).permit(:customer_id, :postage, :total_payment, :payment_method, :name, :postal_cord, :address, :order_status)
+    params.require(:order).permit(:customer_id, :postage, :total_payment, :payment_method, :name, :postal_code, :address, :order_status)
   end
 end
