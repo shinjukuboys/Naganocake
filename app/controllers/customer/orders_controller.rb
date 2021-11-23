@@ -21,9 +21,9 @@ class Customer::OrdersController < ApplicationController
       @postal_code = @customer_address.postal_code
       @address = @customer_address.address
     elsif  params[:order][:addresses] == "2" #新しいお届け先
-      @name = @order.shipping_name
-      @postal_code = @order.shipping_postal_code
-      @address = @order.shipping_address
+      @name = @order.name
+      @postal_code = @order.postal_code
+      @address = @order.address
     end
   end
 
