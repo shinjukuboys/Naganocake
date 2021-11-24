@@ -14,6 +14,19 @@ class Admin::OrdersController < ApplicationController
     @sum = @subtotals.sum
   end
 
+  def update
+   #注文ステータスの更新
+      @order = Order.find(params[:id])
+      @order.update(order_params)
+      if @order.payment_confirm? #enumの確認メソッド
+        @order.order_details.each do |order_detail|
+        order_detail.waiting_production! #enumの更新メソッド
+      end
+  end
+      redirect_to admin_order_path
+end
+
+
   private
 
   def order_params
