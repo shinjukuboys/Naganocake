@@ -1,40 +1,38 @@
-<div class="row">
-  <h2>注文履歴詳細</h2>
-  <div style="margin-top: 50px;">
-    <table class="table">
-      <tbody>
-        <tr>
-          <th scope="row">購入者</th>
-          <td><%=link_to @order.customer.first_name + @order.customer.last_name , admin_customer_path(@order.customer.id) %></td>
-        </tr>
-        <tr>
-          <th scope="row">配送先</th>
-          <td>
-            <p><%= @order.postal_code %><%= @order.address %></p>
-            <p><%= @order.address %></p>
-          </td>
-        </tr>
-        <tr>
-          <th scope="row">支払方法</th>
-          <td><%= @order.payment_method %></td>
-        </tr>
-        <tr>
-          <th scope="row">注文ステータス</th>
-          <td>
-            <%= form_with(model: @order, url: admin_order_details_update_path, method: :patch, local: true) do |f| %>
-              <%= f.select :order_status, Order.order_statuses.keys, class: "order_status" %>
-              <%= f.hidden_field :id, :value => @order.id %>
-              <%= f.submit "更新",class:"btn btn-primary" %>
-            <% end %>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</div>
+<div class="contaner">
+ <div class="row">
+  <div style="margin-top: 50px; padding-left: 80px;">
+    <h2>注文履歴詳細</h2>
 
-<div class="row">
-  <div class="col-xs-8"style="margin-top: 50px;">
+    <div class="row">
+     <div class="offset-md-1 col-md-auto">
+      <table class="order_detail">
+       <tr>
+          <th>購入</th>
+          <td><%=link_to @order.customer.first_name + @order.customer.last_name , admin_customer_path(@order.customer.id)%></td>
+       </tr>
+       <tr>
+          <th>配送先</th>
+          <td><%= @order.postal_code %><%= @order.address %></td>
+       </tr>
+       <tr>
+          <th>支払方法</th>
+          <td><%= @order.payment_method %></td>
+       </tr>
+       <tr>
+          <th>注文ステータス</th>
+          <td>
+           <%= form_with(model: @order, url: admin_order_details_update_path, method: :patch, local: true) do |f| %>
+           <%#= f.select :order_status, Order.order_statuses.keys, class: "order_status" %>
+           <%= f.hidden_field :id, :value => @order.id %>
+           <%= f.submit "更新",class:"btn btn-primary" %>
+           <% end %>
+          </td>
+        </tr>
+        </table>
+      </div>
+    </div>
+ <div class="row">
+ <div class="col-12">
     <table class="table table-bordered">
       <thead>
         <tr class="table-head" style="background-color:#F5F5F5;">
@@ -66,22 +64,23 @@
       </tbody>
     </table>
   </div>
-  <div class="col-xs-4"style="margin-top: 120px;">
+</div>
+
+<div class="col-5">
     <table class="table">
       <tbody>
-        <tr>
-          <th scope="row">商品合計</th>
-          <td><%= @sum %></td>
-        </tr>
-        <tr>
-          <th scope="row">送料</th>
-          <td><%= @order.postage %></td>
-        </tr>
-        <tr>
-          <th scope="row">請求金額合計</th>
-          <td><%= @sum + @order.postage %></td>
-        </tr>
+          <tr>
+            <th>商品合計</th>
+            <td><%= @sum %></td>
+          </tr>
+          <tr>
+            <th>送料</th>
+            <td><%= @order.postage %></td>
+          </tr>
+          <tr>
+            <th>請求金額合計</th>
+            <td><%= @sum + @order.postage %></td>
+          </tr>
       </tbody>
     </table>
   </div>
-</div>
