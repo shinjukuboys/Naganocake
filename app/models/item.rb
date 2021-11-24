@@ -4,7 +4,7 @@ class Item < ApplicationRecord
   has_many :order_details, dependent: :destroy
   attachment :image
 
-  validates :genre_id, :name, :price, presence: true
+  validates :genre_id, :name, presence: true
 	validates :introduction, length: {maximum: 200}
 	validates :price, numericality: { only_integer: true}
 
