@@ -56,7 +56,7 @@
           </tr>
           <tr>
             <th>請求金額</th>
-            <td><%#= @total_payment.floor.to_s(:delimited) %>?</td>
+            <td><%= (@sum.floor + @order.postage).to_s(:delimited) %></td>
           </tr>
         </tbody>
       </table>

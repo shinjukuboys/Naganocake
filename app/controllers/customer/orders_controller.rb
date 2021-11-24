@@ -10,6 +10,9 @@ class Customer::OrdersController < ApplicationController
     @order.postage = 800 #送料を設定する
     @cart_items = current_customer.cart_items #自分のカート内商品を取り出す
     #@total_payment = @order.postage + @cart_items.sum_of_price #請求額の合計を割り出す
+    @sum = 0
+    @subtotals = @cart_items.map { |cart_item| (Item.find(cart_item.item_id).price * 1.1 * cart_item.amount).to_i }
+    @sum = @subtotals.sum
 
     if params[:order][:addresses] == "0" #お届けの方法が自分の住所の時
       @name = current_customer.last_name + current_customer.first_name
