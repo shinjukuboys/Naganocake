@@ -1,11 +1,11 @@
-<div class=container  style="font-family: 'Noto Sans JP',serif;">
+<div class= container  style="font-family: 'Noto Sans JP',serif;">
   <div class="row justify-content-md-center">
     <div>
       <br>
        <br>
         <br>
       <div class="col-md-auto">
-        <%= attachment_image_tag(@item, :image,class: 'show-image',size: "50x50", fallback: "no_image.jpg" ) %>
+         <%=  attachment_image_tag @item, :image, size: "350x300", fallback: "no_image.jpg" %>
         </div>
       </div>
       <br>
@@ -26,7 +26,7 @@
               <%= f.number_field :amount, min: 1, max: 100, placeholder: '個数選択', class:"col-sm-3 quantity-select-form" %><br>
               <%= f.hidden_field :item_id, :value => @item.id %>
               <%= f.hidden_field :customer_id, :value => current_customer.id %><br>
-              <%= f.submit "カートに入れる", class: "btn btn-primary" %>
+              <%= f.submit "カートに入れる", class: "btn ", style: "background-color: #cbb05e; color: black;" %>
               <% end %>
              <% end %>
           <% end %>
