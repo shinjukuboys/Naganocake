@@ -17,8 +17,18 @@
 @import "bootstrap";
 @import "font-awesome";
 
+body {
+  display: flex;
+  flex-flow: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1;
+}
+
 footer{
-  height:100px;
+  height:125px;
   font-family: 'Noto Sans JP',serif;
   background-color: #999;
 	 background-size: cover;
