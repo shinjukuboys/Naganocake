@@ -69,3 +69,4 @@ gem "refile-mini_magick"
 gem "font-awesome-rails"
 gem 'kaminari'
 gem "enum_help"
+gem 'rails-i18n', '~> 5.1'
