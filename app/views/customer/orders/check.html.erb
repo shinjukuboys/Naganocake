@@ -1,4 +1,4 @@
-<div class="container" style="margin-bottom: 250px;">
+<div class="container" style="font-family: 'Noto Sans JP',serif; margin-bottom: 250px;">
   <div class="row">
     <div class="col">
 
@@ -21,7 +21,7 @@
           <tr>
             <td>
               <%= link_to item_path(cart_item) do %>
-                <%= attachment_image_tag cart_item.item , :image, :fill,50,50 ,fallback: "no_image.jpg",size: "50x50" %>
+                <%= attachment_image_tag cart_item.item , :image, class: 'check-image',size: "50x50",fallback: "no_image.jpg" %>
                 <%= cart_item.item.name %>
               <% end %>
             </td>
