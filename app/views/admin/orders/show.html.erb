@@ -1,3 +1,4 @@
+
 <div class="row">
   <h2>注文履歴詳細</h2>
   <div style="margin-top: 50px;">
@@ -21,9 +22,9 @@
         <tr>
           <th scope="row">支払方法</th>
           <td><%= @order.payment_method %></td>
-        </tr>
-        <tr>
-          <th scope="row">注文ステータス</th>
+       </tr>
+       <tr>
+          <th>注文ステータス</th>
           <td>
               <%= form_with model: [:admin, @order], method: :patch, local: true do |f| %>
               <%= f.select :order_status, Order.order_statuses.keys.map {|k| [I18n.t("enums.order.order_status.#{k}"), k]}%>
@@ -32,13 +33,11 @@
             <% end %>
           </td>
         </tr>
-      </tbody>
-    </table>
-  </div>
-</div>
-
-<div class="row">
-  <div class="col-xs-8"style="margin-top: 50px;">
+        </table>
+      </div>
+    </div>
+ <div class="row">
+ <div class="col-12">
     <table class="table table-bordered">
       <thead>
         <tr class="table-head" style="background-color:#F5F5F5;">
@@ -70,22 +69,23 @@
       </tbody>
     </table>
   </div>
-  <div class="col-xs-4"style="margin-top: 120px;">
+</div>
+
+<div class="col-5">
     <table class="table">
       <tbody>
-        <tr>
-          <th scope="row">商品合計</th>
-          <td><%= @sum %></td>
-        </tr>
-        <tr>
-          <th scope="row">送料</th>
-          <td><%= @order.postage %></td>
-        </tr>
-        <tr>
-          <th scope="row">請求金額合計</th>
-          <td><%= @sum + @order.postage %></td>
-        </tr>
+          <tr>
+            <th>商品合計</th>
+            <td><%= @sum %></td>
+          </tr>
+          <tr>
+            <th>送料</th>
+            <td><%= @order.postage %></td>
+          </tr>
+          <tr>
+            <th>請求金額合計</th>
+            <td><%= @sum + @order.postage %></td>
+          </tr>
       </tbody>
     </table>
   </div>
-</div>
