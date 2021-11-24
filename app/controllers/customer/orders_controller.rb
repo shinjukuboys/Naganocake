@@ -16,7 +16,7 @@ class Customer::OrdersController < ApplicationController
       @postal_code = current_customer.postal_code
       @address = current_customer.address
     elsif params[:order][:addresses] == "1" #お届けの方法が登録している住所の時
-      @customer_address = Shipping.find(params[:order][:shipping_id])
+      @customer_address = Address.find(params[:order][:address_id])
       @name = @customer_address.name
       @postal_code = @customer_address.postal_code
       @address = @customer_address.address

@@ -32,7 +32,7 @@
       <div>
         <%= f.radio_button :addresses, 1 %>
         <%= f.label :addresses, "登録済住所から選択", value: 1 %>
-        <%#= f.collection_select :shipping_id, @addresses, :id, :view_address , :prompt => "選択してください" %>
+        <%= f.collection_select :address_id, @addresses, :id, :address , :prompt => "選択してください" %>
       </div>
       <div>
         <%= f.radio_button :addresses, 2 %>
