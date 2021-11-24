@@ -22,7 +22,7 @@
           <th scope="row">注文ステータス</th>
           <td>
             <%= form_with(model: @order, url: admin_order_details_update_path, method: :patch, local: true) do |f| %>
-              <%#= f.select :order_status, Order.order_status.keys.to_a, {} %>
+              <%= f.select :order_status, Order.order_statuses.keys, class: "order_status" %>
               <%= f.hidden_field :id, :value => @order.id %>
               <%= f.submit "更新",class:"btn btn-primary" %>
             <% end %>
