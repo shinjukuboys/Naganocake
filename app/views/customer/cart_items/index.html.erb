@@ -6,7 +6,7 @@
       　<!--もしカートに自分の淹れた商品が存在したら-->
         <% if  @customer_cart_items.exists? %>
           <div class="text-right mb-3">
-            <%= link_to "カートを空にする", cart_items_destroy_all_path, method: :delete, class: "btn", style: "background-color: #333333; color: white;"  %>
+            <%= link_to "カートを空にする", destroy_all_cart_items_path, method: :delete, class: "btn", style: "background-color: #333333; color: white;"  %>
           </div>
           <!--カート内の商品一覧-->
           <table class="table">
