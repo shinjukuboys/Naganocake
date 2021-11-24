@@ -5,13 +5,13 @@
       <tbody>
         <tr>
           <th scope="row">購入者</th>
-          <td><%=link_to @order.customer.first_name + @order.customer.last_name , admins_customer_path(@order.customer.id) %></td>
+          <td><%=link_to @order.customer.first_name + @order.customer.last_name , admin_customer_path(@order.customer.id) %></td>
         </tr>
         <tr>
           <th scope="row">配送先</th>
           <td>
             <p><%= @order.postal_code %><%= @order.address %></p>
-            <p><%= @order.adress %></p>
+            <p><%= @order.address %></p>
           </td>
         </tr>
         <tr>
@@ -21,11 +21,11 @@
         <tr>
           <th scope="row">注文ステータス</th>
           <td>
-            <%= form_with(model: @order, url: admin_orders_order_status_path, method: :patch, local: true) do |f| %>
-              <%= f.select :order_status, Order.order_statuses.keys.to_a, {} %>
-              <%= f.hidden_field :id, :value => @order.id %>
-              <%= f.submit "更新",class:"btn btn-primary" %>
-            <% end %>
+            <%#= form_with(model: @order, method: :patch, local: true) do |f| %>
+              <%#= f.select :order_status, Order.order_statuses.keys.to_a, {} %>
+              <%#= f.hidden_field :id, :value => @order.id %>
+              <%#= f.submit "更新",class:"btn btn-primary" %>
+            <%# end %>
           </td>
         </tr>
       </tbody>
@@ -46,20 +46,20 @@
         </tr>
       </thead>
       <tbody>
-        <% @item_orders.each do |item_order| %>
+        <% @order_details.each do |order_detail| %>
           <tr>
-            <td><%= item_order.item.name %></td>
-            <td><%= item_order.once_price %></td>
-            <td><%= item_order.quantity %></td>
-            <td><%= item_order.once_price * item_order.quantity %>
+            <td><%= order_detail.item.name %></td>
+            <td><%= order_detail.price %></td>
+            <td><%= order_detail.amount %></td>
+            <td><%= order_detail.price * order_detail.amount %>
             </td>
             <td>
-               <%= form_with(model: item_order, url: admin_orders_item_orders_status_path, method: :patch, local: true) do |f| %>
-                <%= f.select :item_order_status, [["着手不可", 0], ["製作待ち", 1], ["製作中", 2], ["製作完了", 3]] ,selected: item_order.item_order_status_before_type_cast %>
-                <%= f.hidden_field :id, :value => item_order.id %>
-                <%= f.hidden_field :order_id, :value => @order.id %>
-                <%= f.submit "更新",class:"btn btn-primary" %>
-              <% end %>
+               <%#= form_with(model: order_details, url: admin_orders_item_orders_status_path, method: :patch, local: true) do |f| %>
+                <%#= f.select :item_order_status, [["着手不可", 0], ["製作待ち", 1], ["製作中", 2], ["製作完了", 3]] ,selected: item_order.item_order_status_before_type_cast %>
+                <%#= f.hidden_field :id, :value => item_order.id %>
+                <%#= f.hidden_field :order_id, :value => @order.id %>
+                <%#= f.submit "更新",class:"btn btn-primary" %>
+              <%# end %>
             </td>
           </tr>
         <% end %>
