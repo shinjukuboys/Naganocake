@@ -18,8 +18,11 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
         get :thanks
       end
     end
-    resources:cart_items, only: [:index, :create, :destroy, :update]
-    delete 'cart_items/destroy_all' => "cart_items#destory_all"
+    resources:cart_items, only: [:index, :create, :destroy, :update]do
+      collection do
+       delete "destroy_all"
+      end
+     end
     resources:items, only: [:index, :show]
     resources:customers, only: [:show, :edit, :update]do
       collection do
