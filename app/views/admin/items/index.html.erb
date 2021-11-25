@@ -1,9 +1,9 @@
-<div class="container">
+<div class="container mt-3 mb-5">
+	<h2>商品一覧</h2>
+	<div class="text-right">
+    <%= link_to "新規登録", new_admin_item_path, class:"btn btn-sm", style: "background-color: #cbb05e; color: black;" %>
+  </div>
   <div class="row">
-		<h2>商品一覧</h2>
-		<div class="col-xs-10 col-xs-offset-1">
-		<%= link_to "新規登録", new_admin_item_path, class: " btn btn-default fas fa-plus" %>
-		</div>
 		<table class="table table-hover table-inverse">
 			<thead>
 				<tr>
@@ -22,10 +22,10 @@
 						<th><%= item.price %></th>
 						<th><%= item.genre.name %></th>
 						<th><% if item.is_active == true %>
-							販売中
-							<% else %>
-							販売停止中
-							<% end %>
+							<strong><p class="text-success">販売中</p></strong>
+						<% else %>
+						  <strong><p class="text-secondary">販売停止中</p></strong>
+						<% end %>
 						</th>
 					</tr>
 				<% end %>
