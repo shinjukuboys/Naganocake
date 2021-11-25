@@ -58,6 +58,9 @@ class Customer::OrdersController < ApplicationController
 
   def show
     @order = Order.find(params[:id])
+    @sum = 0
+    @subtotals = @order.order_details.map { |order_detail| (Item.find(order_detail.item_id).price * 1.1 * order_detail.amount).to_i }
+    @sum = @subtotals.sum
   end
 
   private

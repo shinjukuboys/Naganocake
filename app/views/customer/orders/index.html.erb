@@ -21,6 +21,7 @@
 
       <tbody>
         <% @orders.each do |order| %>
+        <% @sum = 0 %>
         <tr class="light-text">
           <td><%= order.created_at.strftime('%Y年%m月%d日') %></td>
           <td>
@@ -30,9 +31,10 @@
           </td>
           <td>
             <% order.order_details.each do |f| %>
+            <% @sum += f.price * f.amount %>
               <%= f.item.name %><br>
             <% end %>
-          <td>¥<%= order.total_payment%></td>
+          <td>¥<%= (@sum.floor + order.postage).to_s(:delimited) %></td>
           <td><%= order.order_status_i18n %></td>
           <td>
             <%= link_to "詳細", order_path(order.id), class: "btn", style: "background-color: #cbb05e; color: black;" %>
