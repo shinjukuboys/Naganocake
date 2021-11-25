@@ -1,11 +1,12 @@
-<h1>商品編集</h1>
+
 <div class ="container">
+  <h2>商品編集</h2>
   <div class ="row">
     <div class="actions">
       <%= form_with model: @item, url: admin_item_path, local: true do |f| %>
         <div class="img_field">
           <%= f.label "商品画像", class: "col-sm-3 control-label" %>
-          <%= f.attachment_field :image, class: "image" %>
+          <%= f.attachment_field :image%>
         </div>
         <div class="form-group">
           <%= f.label :"商品名", class: "col-sm-3 control-label" %>
@@ -27,9 +28,9 @@
           <%= f.label "販売ステータス", class: "col-sm-3 control-label" %>
           <%= f.select :is_active, [['販売中', true], ['販売停止', false]], prompt: "-- 選択してください --", class: "col-sm-9 is_active" %>
         </div>
-        <%= f.submit "変更を保存", class: "btn btn-primary btn-lg pull-right" %>
+        <%= f.submit "変更を保存", class: "btn btn-primary btn-lg pull-left" %>
       <% end %>
-      
+
     </div>
   </div>
 </div>

@@ -1,2 +1,80 @@
-<h1>Customer::Orders#show</h1>
-<p>Find me in app/views/customer/orders/show.html.erb</p>
+<div class="container " style="font-family: 'Noto Sans JP',serif; margin-top: 50px;">
+<div class="row">
+  <h3>注文履歴詳細</h3>
+</div>
+
+<div class="row">
+  <div class="col-md-6 pt-3">
+    <h4>注文情報</h4>
+    <table class="table table-light table-borderless border">
+      <tbody>
+        <tr>
+          <th>注文日</th>
+          <td><%= @order.created_at.strftime("%Y/%m/%d") %></td>
+        </tr>
+        <tr>
+          <th>配送先</th>
+          <td>
+            〒<%= @order.postal_code %><br>
+            <%= @order.address %><br>
+            <%= @order.name %>
+          </td>
+        </tr>
+        <tr>
+          <th>支払方法</th>
+          <td><%= @order.payment_method_i18n %></td>
+        </tr>
+        <tr>
+          <th>ステータス</th>
+          <td><%= @order.order_status_i18n %></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="col-md-4 pt-3">
+    <h4>請求情報</h4>
+    <table class="table table-light table-borderless border">
+      <tbody>
+        <tr>
+          <th>商品合計</th>
+          <td><%= @sum %></td>
+        </tr>
+        <tr>
+          <th>送料</th>
+          <td><%= @order.postage.to_s(:delimited) %></td>
+        </tr>
+        <tr>
+          <th>ご請求額</th>
+          <td><%#= @sum + @order.postage %></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-8 pt-3">
+    <h4>注文内容</h4>
+    <table class="table table-light table-borderless border">
+      <thead>
+        <tr>
+          <th>商品</th>
+          <th>単価(税込)</th>
+          <th>個数</th>
+          <th>小計</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @order.order_details.each do |order_detail| %>
+          <tr>
+            <td><%= order_detail.item.name %></td>
+            <td><%= order_detail.price.to_s(:delimited) %></td>
+            <td><%= order_detail.amount %></td>
+            <td><%#= order_detail.sum_of_price.to_s(:delimited) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

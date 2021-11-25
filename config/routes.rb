@@ -12,11 +12,17 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
 }
   scope module: :customer do
     resources:addresses, only: [:index, :create, :destroy, :edit, :update]
-    resources:orders, only: [:index, :new, :create, :show]
-    post 'orders/check' => "orders#check"
-    get 'orders/thanks' => "orders#thanks"
-    resources:cart_items, only: [:index, :create, :destroy, :update]
-    delete 'cart_items/destroy_all' => "cart_items#destory_all"
+    resources:orders, only: [:index, :new, :create, :show]do
+      collection do
+        post :check
+        get :thanks
+      end
+    end
+    resources:cart_items, only: [:index, :create, :destroy, :update]do
+      collection do
+       delete "destroy_all"
+      end
+     end
     resources:items, only: [:index, :show]
     resources:customers, only: [:show, :edit, :update]do
       collection do
@@ -29,8 +35,9 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
     root to: 'homes#top'
   end
   namespace :admin do
+    root "orders#index"
     resources:orders, only: [:index, :show, :update]
-    put 'order_details/update' => "order_details#update"
+    resources :order_details, only: [:update]
     resources:genres, only: [:index, :create, :edit, :update]
     resources:items, only: [:index, :new, :show, :create, :edit, :update]
     resources:customers, only: [:index, :show, :edit, :update]

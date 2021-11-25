@@ -1,2 +1,93 @@
-<h1>Admin::Orders#show</h1>
-<p>Find me in app/views/admin/orders/show.html.erb</p>
+<div class= "container">
+  <div class="row">
+    <h2>注文履歴詳細</h2>
+    <div class="col mx-auto"
+    <div style="margin-top: 50px;">
+      <table class="table">
+        <tbody>
+          <tr>
+            <th scope="row">購入者</th>
+            <td><%=link_to @order.customer.first_name + @order.customer.last_name , admin_customer_path(@order.customer.id) %></td>
+          </tr>
+          <tr>
+            <th>注文日</th>
+            <td><%= @order.created_at.strftime('%Y/%m/%d') %></td>
+          </tr>
+          <tr>
+            <th scope="row">配送先</th>
+            <td>
+              <p><%= @order.postal_code %><%= @order.address %></p>
+              <p><%= @order.address %></p>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">支払方法</th>
+            <td><%= @order.payment_method %></td>
+         </tr>
+         <tr>
+            <th>注文ステータス</th>
+            <td>
+                <%= form_with model: [:admin, @order], method: :patch, local: true do |f| %>
+                <%= f.select :order_status, Order.order_statuses.keys.map {|k| [I18n.t("enums.order.order_status.#{k}"), k]}%>
+                <%= f.hidden_field :id, :value => @order.id %>
+                <%= f.submit "更新",class:"btn btn-primary" %>
+              <% end %>
+            </td>
+          </tr>
+      </table>
+    </div>
+  </div>
+</div>
+ <div class="row">
+ <div class="col-10 mx-auto">
+    <table class="table table-bordered">
+      <thead>
+        <tr class="table-head" style="background-color:#F5F5F5;">
+          <th scope="col">商品名</th>
+          <th scope="col">単価（税込）</th>
+          <th scope="col">数量</th>
+          <th scope="col">小計</th>
+          <th scope="col">製作ステータス</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @order_details.each do |order_detail| %>
+          <tr>
+            <td><%= order_detail.item.name %></td>
+            <td><%= order_detail.price %></td>
+            <td><%= order_detail.amount %></td>
+            <td><%= order_detail.price * order_detail.amount %>
+            </td>
+            <td>
+               <%= form_with(model: order_detail, url: admin_order_detail_path(order_detail), method: :patch, local: true) do |f| %>
+                <%= f.select :maiking_status, [["着手不可", 0], ["製作待ち", 1], ["製作中", 2], ["製作完了", 3]] ,selected: order_detail.order_id_before_type_cast %>
+                <%= f.hidden_field :id, :value => order_detail.id %>
+                <%= f.hidden_field :order_id, :value => @order.id %>
+                <%= f.submit "更新",class:"btn btn-primary" %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="col-5 mx-auto">
+    <table class="table">
+      <tbody>
+          <tr>
+            <th>商品合計</th>
+            <td><%= @sum %></td>
+          </tr>
+          <tr>
+            <th>送料</th>
+            <td><%= @order.postage %></td>
+          </tr>
+          <tr>
+            <th>請求金額合計</th>
+            <td><%= @sum + @order.postage %></td>
+          </tr>
+      </tbody>
+    </table>
+  </div>

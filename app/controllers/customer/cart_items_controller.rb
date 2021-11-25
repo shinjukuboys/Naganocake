@@ -7,9 +7,9 @@ class Customer::CartItemsController < ApplicationController
   end
 
   def update
-    @cart_product = CartProduct.find(params[:id])
-    @cart_product.update(cart_product_params)
-    redirect_to cart_products_path, notice: "個数の変更が完了しました"
+    @cart_item = CartItem.find(params[:id])
+    @cart_item.update(params_cart_item)
+    redirect_to cart_items_path, notice: "個数の変更が完了しました"
   end
 
   def create
@@ -36,11 +36,11 @@ class Customer::CartItemsController < ApplicationController
     redirect_to cart_items_path, notice: "#{@cart_item.item.name}を削除しました"
   end
 
+
   def destroy_all
-    @cart_items = current_customer.cart_items
-    @cart_items.destroy_all
-    flash[:alert] = "カートの商品を全て削除しました"
-    redirect_to cart_items_path
+    if CartItem.destroy_all
+      redirect_to cart_items_path, notice: "カート内を全て削除しました"
+    end
   end
 
   private
