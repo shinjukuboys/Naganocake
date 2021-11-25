@@ -1,7 +1,7 @@
-<div class ="container">
+<div class ="container mt-3 mb-3">
   <h2>商品詳細</h2>
   <div class="row">
-	  <div class="col-xs-6 mx-auto">
+	  <div class="col-md-6 mx-auto">
 	      <div id="img_field">
 	        <%= attachment_image_tag(@item, :image,class: 'show-image', size: "300x220", fallback: "no_image.jpg") %>
         </div>
@@ -31,13 +31,13 @@
 					<p>
 						販売ステータス
 		        <% if @item.is_active == true %>
-							　<i class="fas fa-bullseye red"></i>販売中
+							　<p class="text-success mt-2">販売中</p>
 						<% elsif @item.is_active == false %>
-							　<i class="fas fa-bullseye blue"></i>販売停止中
+							　<p class="text-secondary mt-2">販売停止中</p>
 						<% end %>
 					</p>
 	      </div>
-	      	<%= link_to "編集する", edit_admin_item_path(@item), data: {"turbolinks" => false}, class: "fas fa-pencil btn btn-success pull-left" %>
+	      	<%= link_to "編集する", edit_admin_item_path(@item.id), class:"btn btn-sm", style: "background-color: #cbb05e; color: black;" %>
     </div>
   </div>
 </div>
