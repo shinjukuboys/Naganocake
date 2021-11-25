@@ -10,9 +10,9 @@
         <% end %>
       </div>
       <h2>注文情報入力</h2>
+      <%= form_with model: @order,url: check_orders_path, method: :post, local: true do |f| %>
       <div class="mt-5">
         <p>支払い方法</p>
-        <%= form_with model: @order,url: check_orders_path, method: :post, local: true do |f| %>
         <%= f.radio_button :payment_method, "credit_card" %>
         <%= f.label :payment_method, "クレジットカード" %>
 
