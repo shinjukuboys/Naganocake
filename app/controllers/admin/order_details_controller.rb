@@ -16,6 +16,6 @@ class Admin::OrderDetailsController < ApplicationController
 
     private
     def order_detail_params
-       params.permit(:production_status)
+       params.require(:order_detail).permit(:maiking_status)
     end
 end
