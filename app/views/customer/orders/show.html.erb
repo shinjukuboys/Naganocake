@@ -38,15 +38,15 @@
       <tbody>
         <tr>
           <th>商品合計</th>
-          <td><%= @sum %></td>
+          <td>¥<%#= (@order.sum - @order.postage).floor.to_s(:delimited) %></td>
         </tr>
         <tr>
           <th>送料</th>
-          <td><%= @order.postage.to_s(:delimited) %></td>
+          <td>¥<%= @order.postage.to_s(:delimited) %></td>
         </tr>
         <tr>
           <th>ご請求額</th>
-          <td><%#= @sum + @order.postage %></td>
+          <td>¥<%#= @order.sum.floor.to_s(:delimited) %></td>
         </tr>
       </tbody>
     </table>
@@ -71,7 +71,7 @@
             <td><%= order_detail.item.name %></td>
             <td><%= order_detail.price.to_s(:delimited) %></td>
             <td><%= order_detail.amount %></td>
-            <td><%#= order_detail.sum_of_price.to_s(:delimited) %></td>
+            <td>¥<%= (order_detail.price * order_detail.amount).floor.to_s(:delimited) %></td>
           </tr>
         <% end %>
       </tbody>
