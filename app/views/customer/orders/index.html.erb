@@ -1,11 +1,7 @@
-<div class="container my-5" style="height: 650px;">
+<div class="container " style="font-family: 'Noto Sans JP',serif; margin-top: 50px;">
 
   <div class="row">
-    <div class="offset-1 text-center">
-      <h3 class="text title-text">
-        注文履歴一覧
-      </h3>
-    </div>
+      <h3>注文履歴一覧</h3>
   </div>
 
 <% if @orders.exists? %>
@@ -36,9 +32,8 @@
             <% order.order_details.each do |f| %>
               <%= f.item.name %><br>
             <% end %>
-          </td>
-          <td>¥<%= order.payment_method %></td>
-          <td><%= order.order_status  %></td>
+          <td>¥<%= order.total_payment%></td>
+          <td><%= order.order_status_i18n %></td>
           <td>
             <%= link_to "詳細", order_path(order.id), class: "btn", style: "background-color: #cbb05e; color: black;" %>
           </td>
