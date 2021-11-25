@@ -1,4 +1,4 @@
-<div class="container" style="font-family: 'Noto Sans JP',serif; margin-bottom: 250px;">
+<div class="container taksa" style="font-family: 'Noto Sans JP',serif; margin-top: 50px;">
   <div class="row">
     <div class="col">
 
@@ -21,7 +21,7 @@
           <tr>
             <td>
               <%= link_to item_path(cart_item) do %>
-                <%=  attachment_image_tag @item, :image, size: "200x150", fallback: "no_image.jpg" %><br>
+                <%=  attachment_image_tag cart_item.item, :image, size: "200x150", fallback: "no_image.jpg" %><br>
                 <%= cart_item.item.name %>
               <% end %>
             </td>
