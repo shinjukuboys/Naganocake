@@ -1,2 +1,54 @@
-<h1>Customer::Orders#index</h1>
-<p>Find me in app/views/customer/orders/index.html.erb</p>
+<div class="container " style="font-family: 'Noto Sans JP',serif; margin-top: 50px;">
+
+  <div class="row">
+      <h3>注文履歴一覧</h3>
+  </div>
+
+<% if @orders.exists? %>
+  <div class="row mt-5">
+    <table class="table table-bordered table-hover">
+
+      <thead class="table-active text">
+        <tr>
+          <th>注文日</th>
+          <th>配送先</th>
+          <th>注文商品</th>
+          <th>支払金額</th>
+          <th>ステータス</th>
+          <th>注文詳細</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @orders.each do |order| %>
+        <tr class="light-text">
+          <td><%= order.created_at.strftime('%Y年%m月%d日') %></td>
+          <td>
+              〒<%= order.postal_code %><br>
+              <%= order.address %><br>
+              <%= order.name %> 様
+          </td>
+          <td>
+            <% order.order_details.each do |f| %>
+              <%= f.item.name %><br>
+            <% end %>
+          <td>¥<%= order.total_payment%></td>
+          <td><%= order.order_status_i18n %></td>
+          <td>
+            <%= link_to "詳細", order_path(order.id), class: "btn", style: "background-color: #cbb05e; color: black;" %>
+          </td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <div class="pagination"><%= paginate @orders %></div>
+  </div>
+
+
+
+  <% else %>
+      <div class="text-center">
+        <h2>※注文履歴がありません</h2>
+      </div>
+  <% end %>
+</div>

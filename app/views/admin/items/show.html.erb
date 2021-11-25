@@ -1,2 +1,43 @@
-<h1>Admin::Items#show</h1>
-<p>Find me in app/views/admin/items/show.html.erb</p>
+<div class ="container mt-3 mb-3" style="font-family: 'Noto Sans JP',serif;">
+  <h2>商品詳細</h2>
+  <div class="row">
+	  <div class="col-md-6 mx-auto">
+	      <div id="img_field">
+	        <%= attachment_image_tag(@item, :image,class: 'show-image', size: "300x220", fallback: "no_image.jpg") %>
+        </div>
+	      <div class="field">
+					<p>
+						商品名　　　　　<%= @item.name %>
+					</p>
+	      </div><br>
+	      <div class="field">
+					<p>
+						商品説明　　　　<%= @item.introduction %>
+					</p><br>
+	      </div>
+	      <div class="field">
+					<p>
+						ジャンル　　　　<%= @item.genre.name %>
+					</p><br>
+	      </div>
+	      <div class="field">
+					<p>
+						税込価格￥<%= (@item.price * 1.1).to_i %>
+	        								(<%= @item.price.to_s(:delimited) %>) 円<br>
+						(税抜価格)
+					</p><br>
+	      </div>
+	      <div class="field">
+					<p>
+						販売ステータス
+		        <% if @item.is_active == true %>
+							　<p class="text-success mt-2">販売中</p>
+						<% elsif @item.is_active == false %>
+							　<p class="text-secondary mt-2">販売停止中</p>
+						<% end %>
+					</p>
+	      </div>
+	      	<%= link_to "編集する", edit_admin_item_path(@item.id), class:"btn btn-sm", style: "background-color: #cbb05e; color: black;" %>
+    </div>
+  </div>
+</div>

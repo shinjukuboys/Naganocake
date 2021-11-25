@@ -1,2 +1,52 @@
-<h1>Customer::Customers#show</h1>
-<p>Find me in app/views/customer/customers/show.html.erb</p>
+<div class="container" style="font-family: 'Noto Sans JP',serif; margin-top: 25px;">
+ <table class="table table-bordered">
+  <thead>
+   <br>
+    <h1>マイページ</h1>
+   <br>
+    <strong>登録情報</strong> &emsp;  <%= link_to "編集する",edit_customer_path(@customer),  class: "btn", style: "background-color: #cbb05e; color: black;"%>
+   <br>
+    <colgroup>
+      <col class="col-sm-2 control-label mr-4 ">
+      <col class="col-mr-4">
+    </colgroup>
+    <tbody>
+      <tr>
+       <th>氏名</th>
+        <td><%= @customer.first_name %> <%= @customer.last_name %></td>
+      </tr>
+
+      <tr>
+        <th>カナ</th>
+        <td><%= @customer.first_name_kana %> <%= @customer.last_name_kana %></td>
+      </tr>
+
+      <tr>
+        <th>郵便番号</th>
+        <td><%= @customer.postal_code %></td>
+      </tr>
+
+      <tr>
+        <th>住所</th>
+        <td><%= @customer.address %></td>
+      </tr>
+
+      <tr>
+        <th>電話番号</th>
+        <td><%= @customer.telephone_number %></td>
+      </tr>
+      <tr>
+        <th>メールアドレス</th>
+        <td><%= @customer.email %></td>
+      </tr>
+     </tbody>
+  </tabele>
+  <br>
+    <table class="adresses">
+  	 <p><strong>配送先</strong> &emsp;&emsp;  <%= link_to "一覧を見る",addresses_path, class: "btn mt-3", style: "background-color: #6599cc; color: white;"%></p>
+  	</table>
+  	<table class="orders">
+  		<p><strong>注文履歴</strong> &emsp; <%= link_to "一覧を見る",orders_path, class: "btn mt-3", style: "background-color: #6599cc; color: white;" %></p>
+  	</table>
+</div>
+

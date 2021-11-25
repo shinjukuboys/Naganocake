@@ -1,2 +1,89 @@
-<h1>Customer::CartItems#index</h1>
-<p>Find me in app/views/customer/cart_items/index.html.erb</p>
+<div class="container mt-5 mb-3"  style="font-family: 'Noto Sans JP',serif;">
+  <div class="row">
+    <div class="col">
+      <span class="notice"><%= notice %></span>
+      <h2>ショッピングカート</h2>
+      　<!--もしカートに自分の淹れた商品が存在したら-->
+        <% if  @customer_cart_items.exists? %>
+          <div class="text-right mb-3">
+            <%= link_to "カートを空にする", destroy_all_cart_items_path, method: :delete, class: "btn", style: "background-color: #333333; color: white;"  %>
+          </div>
+          <!--カート内の商品一覧-->
+          <table class="table">
+            <thead>
+              <tr>
+                <th>商品名</th>
+                <th>単価（税込）</th>
+                <th>数量</th>
+                <th>小計</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <!--合計金額の初期値を設定これに繰り返し金額を代入していく-->
+              <% @sum = 0 %>
+              <!--自分のカートない商品を一覧表示-->
+              <%  @customer_cart_items.each do |cart_item| %>
+              <tr>
+                <td>
+                  <%#= link_to item_path(@cart_item) do %>
+                    <%=  attachment_image_tag cart_item.item, :image, size: "250x200", fallback: "no_image.jpg" %>
+                    <%= cart_item.item.name %>
+                  <%# end %>
+                </td>
+                <td>
+                  <% @item_price = cart_item.item.price * 1.1 %>
+                  ¥<%= @item_price.floor.to_s(:delimited) %>
+                </td>
+                <td>
+                  <%= form_with model: cart_item, url: cart_item_path(cart_item), method: :patch, local: true do |f| %>
+                    <!--個数を選択-->
+                    <%= f.select :amount,[[1,1],[2,2],[3,3],[4,4],[5,5],[6,6],[7,7],[8,8],[9,9],[10,10]],{inclued_blank: "個数選択"} %>
+                    <!--カートの主キーを送る-->
+                    <!--<=%= f.hidden_field :id, :value => cart %>-->
+                    <!--自分のIDを送る-->
+                    <%= f.hidden_field :customer_id, :value => current_customer.id %>
+                    <%= f.hidden_field :item_id, :value => cart_item.item.id %>
+                    <%= f.submit "更新", class: "btn",style: "background-color: #333333; color: white;" %>
+                  <% end %>
+                </td>
+                <td>
+                  <!--金額掛ける個数で計算する-->
+                  <% @total = @item_price * cart_item.amount.to_i %>
+                  ¥<%= @total.floor.to_s(:delimited) %>
+                </td>
+                  <!--金額が計算されたら、設定した初期値に金額を足していく-->
+                  <% @sum += @total %>
+                <td>
+                  <%= link_to "削除する", cart_item_path(cart_item), method: :delete, class: "btn", style: "background-color: #333333; color: white;" %>
+                </td>
+              </tr>
+              <% end %>
+            </tbody>
+          </table>
+          <!--合計金額のテーブル-->
+          <table align="right">
+            <tbody class="table table-bordered" style="font-size: 20px;">
+              <!--最終的な金額をここで表示-->
+              <th>合計金額</th>
+              <td><%= @sum.floor.to_s(:delimited) %></td>
+            </tbody>
+          </table>
+
+          <div>
+            <%= link_to "買い物を続ける", root_path, class: "btn mt-5", style: "background-color: #6599cc; color: white;"  %>
+          </div>
+
+          <div class="text-center">
+            <%= link_to "情報入力画面に進む", new_order_path , class: "btn mt-3", style: "background-color: #cbb05e; color: black;"%>
+          </div>
+        <% else %>
+        <!--カートに自分の入れた商品が存在していなかったら-->
+        <div class="text-center mt-5" style="font-size: 20px;">
+          <p>※商品一覧から、商品をカートに入れてください</p>
+        </div>
+        <% end %>
+    </div>
+  </div>
+</div>
+

@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_17_012831) do
+ActiveRecord::Schema.define(version: 2021_11_25_061907) do
+
+  create_table "addresses", force: :cascade do |t|
+    t.integer "customer_id"
+    t.string "name"
+    t.string "address"
+    t.string "postal_code"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -22,15 +31,6 @@ ActiveRecord::Schema.define(version: 2021_11_17_012831) do
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_admins_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
-  end
-
-  create_table "adresses", force: :cascade do |t|
-    t.integer "customer_id"
-    t.string "name"
-    t.string "address"
-    t.string "postal_code"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "cart_items", force: :cascade do |t|
@@ -90,7 +90,6 @@ ActiveRecord::Schema.define(version: 2021_11_17_012831) do
 
   create_table "orders", force: :cascade do |t|
     t.integer "customer_id"
-    t.integer "order_status"
     t.integer "postage"
     t.integer "total_payment"
     t.integer "payment_method"
@@ -99,6 +98,7 @@ ActiveRecord::Schema.define(version: 2021_11_17_012831) do
     t.string "postal_code"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "order_status", default: 0, null: false
   end
 
 end

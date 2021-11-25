@@ -1,0 +1,29 @@
+ <div class="color">
+  <div class="container">
+  <div class="row"  style="margin-left: 100px; margin-top: 25px;">
+    <%= image_tag 'Naganocake.png'%>
+  </div>
+
+
+
+
+<div class="container" style="font-family: 'Noto Sans JP',serif; margin-left: 55px; margin-top: 40px;">
+ <div class="col-md-9 offset-md-1">
+  <h2>新着商品</h2>
+  <div class="row">
+   <% @items.each do |item| %>
+    <div class="col-md-3">
+     <%= link_to item_path(item) do %>
+     <%=  attachment_image_tag item, :image, size: "200x150", fallback: "no_image.jpg"  %><br>
+     <% end %>
+     商品名<br><%= link_to item.name, item_path(item) %><br>
+     価格¥<%= (item.price * 1.1).to_i %>
+     </div>
+    <% end %>
+ </div>
+
+
+  <div class= "text-center">
+   <%= link_to "全ての商品を見る", items_path, class: "btn mt-3", style: "background-color: #cbb05e; color: black;" %>
+  </div>
+  </div>

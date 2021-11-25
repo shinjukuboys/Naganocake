@@ -1,2 +1,57 @@
-<h1>Admin::Customers#show</h1>
-<p>Find me in app/views/admin/customers/show.html.erb</p>
+<div class=“row”>
+  <div class = "body" style>
+  	<div class = "container" style="font-family: 'Noto Sans JP',serif;">
+  		<br><br>
+        <h2><%= @customer.first_name %><%= @customer.last_name %>さんの会員情報</h2>
+
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">会員ID</th>
+                <td style>
+                  <%= @customer.id %>&ensp;
+                  <% if @customer.is_active == true %>
+                    有効
+                  <% else %>
+                    退会
+                  <% end %>
+                </td>
+              </tr>
+
+              <tr>
+                <th scope="col">氏名</th>
+                <td style><%= @customer.first_name %>&ensp;<%= @customer.last_name %></td>
+              </tr>
+
+              <tr>
+                <th scope="col">カナ</th>
+                <td style><%= @customer.first_name_kana %>&ensp;<%= @customer.last_name_kana %></td>
+              </tr>
+
+              <tr>
+                <th scope="col">郵便番号</th>
+                <td style><%= @customer.postal_code %></td>
+              </tr>
+
+              <tr>
+                 <th scope="col">住所</th>
+                <td style><%= @customer.address %></td>
+              </tr>
+
+              <tr>
+                <th scope="col">電話番号</th>
+                <td style><%= @customer.telephone_number %></td>
+              </tr>
+
+              <tr>
+                <th scope="col">メールアドレス</th>
+                <td style><%= @customer.email %></td>
+              </tr>
+          </thead>
+  	</table>
+
+  	 <%= link_to "編集する", edit_admin_customer_path, class: "btn btn-primary" %>
+  	 <%= link_to "注文履歴一覧を見る", admin_orders_path, class: "btn btn-primary" %>
+    </div>
+  </div>
+</div>

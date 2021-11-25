@@ -1,0 +1,94 @@
+<header style="font-family: 'Noto Sans JP',serif;">
+  <nav class="navbar navbar-expand-lg bg-dark  " id="navbarHeader">
+    <div class="container">
+      <%= link_to image_tag("logo3.png", size: "100x100"), root_path, class: "mt-2" %>
+      <div class="navbar navbar-dark shadow-sm">
+        <div class="container d-flex justify-content-between">
+          <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        </div>
+      </div>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav ml-auto">
+        <% if admin_signed_in? %>
+          <li class="nav-item">
+            <%= link_to admin_items_path, class: 'nav-link text-light  ml-2' do %>
+            商品一覧
+            <% end %>
+          </li>
+          <li class="nav-item">
+            <%= link_to admin_customers_path, class: 'nav-link text-light  ml-2' do %>
+            会員一覧
+            <% end %>
+          </li>
+          <li class="nav-item">
+            <%= link_to admin_orders_path, class: 'nav-link text-light  ml-2' do %>
+            注文履歴一覧
+            <% end %>
+          </li>
+          <li class="nav-item">
+            <%= link_to admin_genres_path, class: 'nav-link text-light  ml-2' do %>
+            ジャンル一覧
+            <% end %>
+          </li>
+          <li class="nav-item">
+            <%= link_to destroy_admin_session_path, class: 'nav-link text-light  ml-2', method: :delete do %>
+            ログアウト
+            <% end %>
+          </li>
+        <% elsif customer_signed_in? %>
+          <span class="mt-2" style="color: white;">ようこそ、<%= current_customer.first_name %>さん</span>
+          <li class="nav-item">
+            <%= link_to customer_path(current_customer), class: 'nav-link text-light  ml-2' do %>
+            マイページ
+            <% end %>
+          </li>
+          <li class="nav-item">
+            <%= link_to items_path, class: 'nav-link text-light  ml-2' do %>
+            商品一覧
+            <% end %>
+          </li>
+          <li class="nav-item">
+            <%= link_to cart_items_path, class: 'nav-link text-light  ml-2' do %>
+            カート
+            <% end %>
+          </li>
+          <li class="nav-item">
+            <%= link_to destroy_customer_session_path, class: 'nav-link text-light  ml-2', method: :delete do %>
+            ログアウト
+            <% end %>
+          </li>
+        <% else %>
+          <li class="nav-item">
+            <%= link_to homes_about_path, class: 'nav-link text-light  ml-2' do %>
+            About
+            <% end %>
+          </li>
+          <li class="nav-item">
+            <%= link_to items_path, class: 'nav-link text-light  ml-2' do %>
+            商品一覧
+            <% end %>
+          </li>
+          <li class="nav-item">
+            <%= link_to new_customer_registration_path, class: 'nav-link text-light  ml-2' do %>
+            新規登録
+            <% end %>
+          </li>
+          <li class="nav-item">
+            <%= link_to new_customer_session_path, class: 'nav-link text-light  ml-2' do %>
+            ログイン
+            <% end %>
+          </li>
+        <% end %>
+        </ul>
+        <form class="d-flex">
+          <input class="ml-2 form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-light ml-2" type="submit">
+            <i class="fas fa-search">Search</i>
+          </button>
+        </form>
+      </div>
+    </div>
+  </nav>
+</header>

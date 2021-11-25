@@ -1,2 +1,46 @@
-<h1>Customer::Customers#edit</h1>
-<p>Find me in app/views/customer/customers/edit.html.erb</p>
+<div class="container style=font-family: 'Noto Sans JP',serif; margin: 150px;">
+  <div cass="text-center">
+   <br>
+   <h2>会員情報編集</h2>
+    <br>
+     <div class="actions">
+    <%= form_with model:@customer, local:true do |f| %>
+    <div>
+    <div class="form-group">
+     <%= f.label "氏名",class: "col-sm-2 control-label mr-5"%>
+    <%= f.text_field :first_name, class: "col-sm-3 control-label" %><%= f.text_field :last_name, class: "col-sm-3 control-label" %>
+    </div>
+
+    <div class="form-group">
+    <%= f.label "カナ",class: "col-sm-2 control-label mr-5"%>
+    <%= f.text_field :first_name_kana, class: "col-sm-3 control-label" %><%= f.text_field :last_name_kana, class: "col-sm-3 control-label" %>
+    </div>
+
+    <div class="form-group">
+     <%= f.label " 郵便番号",class: "col-sm-2 control-label mr-5" %>
+     <%= f.text_field :postal_code, class: "col-sm-3 control-label" %>
+    </div>
+
+    <div class="form-group">
+    <%= f.label " 住所",class: "col-sm-2 control-label mr-5" %>
+    <%= f.text_field :address, class: "col-sm-6 control-label" %>
+    </div>
+
+    <div class="form-group">
+    <%= f.label " 電話番号",class: "col-sm-2 control-label mr-5" %>
+    <%= f.text_field :telephone_number, class: "col-sm-3 control-label" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label " メールアドレス",class: "col-sm-2 control-label mr-5" %>
+    <%= f.text_field :email, class: "col-sm-3 control-label" %>
+    </div>
+
+    <%= f.submit "編集内容を保存する", class: "btn mt-2", style: "background-color: #cbb05e; color: black;" %>
+    <%= link_to '退会する', quit_customers_path, class: "glyphicon glyphicon-tint btn btn-danger mt-2"%>
+    <% end %>
+    </div>
+   </div>
+  </div>
+</div>
+

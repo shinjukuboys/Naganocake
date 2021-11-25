@@ -4,12 +4,23 @@
     <title>Naganocake</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <script src="https://kit.fontawesome.com/6f0d38cdd3.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="//jpostal-1006.appspot.com/jquery.jpostal.js"></script>
+
   </head>
 
   <body>
+    <%= render "layouts/header" %>
+      <main>
+        <div id="flash">
+          <%= render "layouts/flash" %>
+        </div>
     <%= yield %>
+      </main>
+    <%= render "layouts/footer" %>
   </body>
 </html>

@@ -1,2 +1,35 @@
-<h1>Admin::Orders#index</h1>
-<p>Find me in app/views/admin/orders/index.html.erb</p>
+<div class="container mt-3 mb-3" style="font-family: 'Noto Sans JP',serif;">
+  <h2>注文履歴一覧</h2>
+  <div class="row">
+    <div class="offset-md-1 col-md-10 offset-md-1">
+        <table class="table table-hover table-bordered table-condensed">
+          <thead>
+            <tr class="table-head" style="background-color:#F5F5F5;">
+              <th scope="col">購入日時</th>
+              <th scope="col">購入者</th>
+              <th scope="col">注文個数</th>
+              <th scope="col">注文ステータス</th>
+            </tr>
+          </thead>
+          <tbody>
+            <%  @orders.each do |order| %>
+              <tr>
+                <td><%=link_to order.created_at.strftime('%Y/%m/%d %H:%M:%S'), admin_order_path(order) %></td>
+                <td><%= order.customer.first_name %><%= order.customer.last_name %></td>
+                <td>
+                  <% @sum  = 0 %>
+                  <% order.order_details.all.each do |order_detail|  %>
+                    <% @amout = order_detail.amount %>
+                    <% @sum += @amout  %>
+                  <% end %>
+                  <%= @sum %>
+                </td>
+                <td><%= order.order_status_i18n %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+        <p class="col-xs-3 col-xs-offset-5"><%= paginate @orders %></p>
+    </div>
+  </div>
+</div>

@@ -1,2 +1,18 @@
-<h1>Admin::Genres#edit</h1>
-<p>Find me in app/views/admin/genres/edit.html.erb</p>
+<div class="container mt-3 mb-3" style="font-family: 'Noto Sans JP',serif;">
+  <h2 class="head-line title_h2 text-center" >ジャンル編集</h2>
+  <div class="row">
+      <div class="col-md6 mt-3 mx-auto">
+  
+      <% if @genre.errors.any? %>
+        <%= render "layouts/error_messages", resource: @genre %>
+      <% end %>
+      <%= form_for @genre, :url => {:action => :update} do |f| %>
+      <div>
+        ジャンル
+          <%= f.text_field :name  %>
+          <%= f.submit "変更を保存する", class: "btn btn-info" %>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>

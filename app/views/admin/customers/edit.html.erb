@@ -1,2 +1,63 @@
-<h1>Admin::Customers#edit</h1>
-<p>Find me in app/views/admin/customers/edit.html.erb</p>
+<div class=“row”>
+	<div class = "body" style>
+		<div class = "container mt-3 md-3" style="font-family: 'Noto Sans JP',serif;">
+			<h2><%= @customer.first_name %><%= @customer.last_name %>さんの会員情報編集</h2>
+
+				<%= form_with(model: @customer, url: admin_customer_path(@customer) ,local: true ,method: :patch) do |f| %>
+				<div class="field">
+	              <%= f.label :会員ID %><br>
+	                <%= @customer.id %>
+	              </div>
+
+				<div class="field">
+				    <%= f.label :名前 %><br>
+				    <%= f.label :（姓） %>
+				    <%= f.text_field :first_name, autofocus: true, autocomplete: "email" %>
+				    <%= f.label :（名） %>
+				    <%= f.text_field :last_name, autofocus: true, autocomplete: "email" %>
+				 </div>
+
+				 <div class="field">
+				    <%= f.label :フリガナ %><br />
+				    <%= f.label :（セイ） %>
+				    <%= f.text_field :first_name_kana, autofocus: true, autocomplete: "email" %>
+				    <%= f.label :（メイ） %>
+				    <%= f.text_field :last_name_kana, autofocus: true, autocomplete: "email" %>
+				 </div>
+
+				 <div class="field">
+				    <%= f.label :郵便番号（ハイフンなし） %><br />
+				    <%= f.text_field :postal_code, autofocus: true, autocomplete: "email" %>
+				 </div>
+
+				 <div class="field">
+				    <%= f.label :住所 %><br />
+				    <%= f.text_field :address, autofocus: true, autocomplete: "email" %>
+				 </div>
+
+				 <div class="field">
+				    <%= f.label :電話番号（ハイフンなし） %><br />
+				    <%= f.text_field :telephone_number, autofocus: true, autocomplete: "email" %>
+
+				 <div class="field">
+				    <%= f.label :メールアドレス %><br />
+				    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+				 </div>
+
+				 <div class="field">
+
+			      <div class="form-group col-xs-9">
+        <%= f.label :"会員ステータス", class: "col-sm-4 control-label" %>
+        　<%= f.radio_button :is_active, true %>
+        　<%= f.label :is_active, "有効", {value: :true, style: "display: inline-block;"} %>
+        　<%= f.radio_button :is_active, false %>
+        　<%= f.label :is_active, "退会", {value: :false, style: "display: inline-block;"} %>
+				 </div>
+
+				    <%= f.submit"編集内容を保存する", class: "btn btn-primary"%>
+
+				 </div>
+			<% end %>
+		</div>
+	</div>
+</div>
