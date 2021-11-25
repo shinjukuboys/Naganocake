@@ -1,6 +1,6 @@
 <div class=“row”>
 	<div class = "body" style>
-		<div class = "container">
+		<div class = "container mt-3 md-3" style="font-family: 'Noto Sans JP',serif;">
 			<h2><%= @customer.first_name %><%= @customer.last_name %>さんの会員情報編集</h2>
 
 				<%= form_with(model: @customer, url: admin_customer_path(@customer) ,local: true ,method: :patch) do |f| %>
