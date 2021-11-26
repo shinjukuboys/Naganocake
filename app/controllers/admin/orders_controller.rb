@@ -20,7 +20,7 @@ class Admin::OrdersController < ApplicationController
       @order.update(order_params)
       if @order.payment_confirm? #enumの確認メソッド
         @order.order_details.each do |order_detail|
-        order_detail.waiting_item! #enumの更新メソッド
+        order_detail.waiting_production! #enumの更新メソッド
       end
   end
       redirect_to admin_order_path
