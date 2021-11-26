@@ -23,7 +23,7 @@
           <% if customer_signed_in? %>
       				<% if @item.is_active == true %>
               <%= form_with model: CartItem, url: cart_items_path,method: :post, local: true do |f| %>
-              <%= f.number_field :amount, min: 1, max: 100, placeholder: '個数選択', class:"col-sm-3 quantity-select-form" %><br>
+              <%= f.select :amount, options_for_select((1..10).to_a), include_blank: "個数選択", class: "col-sm-3 quantity-select-form" %><br>
               <%= f.hidden_field :item_id, :value => @item.id %>
               <%= f.hidden_field :customer_id, :value => current_customer.id %><br>
               <%= f.submit "カートに入れる", class: "btn ", style: "background-color: #cbb05e; color: black;" %>

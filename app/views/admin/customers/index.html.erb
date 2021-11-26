@@ -1,7 +1,12 @@
-<div class= "container">
-  <h2 class="head-line title_h2 text-center">会員一覧</h2>
-  <div class="row">
-    <div class="col-xs-10 col-xs-offset-1">
+<div class="container" style="font-family: 'Noto Sans JP',serif; margin-top: 50px;">
+  <div class='row'>
+    <div class="col-md-9 offset-md-1">
+     <h2>会員一覧</h2>
+     </div>
+  </div>
+ </div>
+ <div class="container" style="font-family: 'Noto Sans JP',serif; margin-top: 20px;">
+    <div class="offset-md-1 col-md-10 offset-md-1">
       <table class="table table-hover table-bordered table-condensed">
         <thead>
           <tr class="info">
@@ -11,7 +16,6 @@
             <th>ステータス</th>
           </tr>
         </thead>
-  
         <tbody>
           <% @customers.each do |customer| %>
             <tr>
@@ -29,15 +33,16 @@
               </td>
               <td class="col-xs-2">
                 <% if customer.is_active == true %>
-                  <p><i class="fas fa-bullseye blue"></i>有効</p>
+                  <strong><p class="text-success">有効</p></strong>
                 <% else %>
-                  <p><i class="fas fa-bullseye red"></i>退会済</p>
+                  <strong><p class="text-secondary">退会済</p></strong>
                 <% end %>
               </td>
             </tr>
           <% end %>
         </tbody>
       </table>
+    </div>
     </div>
       <div class= "text-center"><%= paginate(@customers) %></div>
   </div>

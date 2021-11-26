@@ -38,7 +38,7 @@
             <% end %>
           </li>
         <% elsif customer_signed_in? %>
-          <span class="mt-2" style="color: white;">ようこそ、<%= current_customer.last_name %>さん</span>
+          <span class="mt-2" style="color: white;">ようこそ、<%= current_customer.first_name %>さん</span>
           <li class="nav-item">
             <%= link_to customer_path(current_customer), class: 'nav-link text-light  ml-2' do %>
             マイページ

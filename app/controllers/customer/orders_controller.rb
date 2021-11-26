@@ -15,7 +15,7 @@ class Customer::OrdersController < ApplicationController
     @sum = @subtotals.sum
 
     if params[:order][:addresses] == "0" #お届けの方法が自分の住所の時
-      @name = current_customer.last_name + current_customer.first_name
+      @name = current_customer.first_name + current_customer.last_name
       @postal_code = current_customer.postal_code
       @address = current_customer.address
     elsif params[:order][:addresses] == "1" #お届けの方法が登録している住所の時
@@ -58,6 +58,9 @@ class Customer::OrdersController < ApplicationController
 
   def show
     @order = Order.find(params[:id])
+    @sum = 0
+    @subtotals = @order.order_details.map { |order_detail| (Item.find(order_detail.item_id).price * 1.1 * order_detail.amount).to_i }
+    @sum = @subtotals.sum
   end
 
   private

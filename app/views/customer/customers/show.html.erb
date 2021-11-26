@@ -1,10 +1,10 @@
-<div class="container">
+<div class="container" style="font-family: 'Noto Sans JP',serif; margin-top: 25px;">
  <table class="table table-bordered">
-  <thead> 
+  <thead>
    <br>
     <h1>マイページ</h1>
    <br>
-    <strong>登録情報</strong> &emsp;  <%= link_to "編集する",edit_customer_path(@customer), class: "btn btn-success"%>
+    <strong>登録情報</strong> &emsp;  <%= link_to "編集する",edit_customer_path(@customer),  class: "btn", style: "background-color: #cbb05e; color: black;"%>
    <br>
     <colgroup>
       <col class="col-sm-2 control-label mr-4 ">
@@ -43,10 +43,10 @@
   </tabele>
   <br>
     <table class="adresses">
-  	 <p><strong>配送先</strong> &emsp;&emsp;  <%= link_to "一覧を見る",addresses_path,class: "btn btn-primary" %></p>
+  	 <p><strong>配送先</strong> &emsp;&emsp;  <%= link_to "一覧を見る",addresses_path, class: "btn mt-3", style: "background-color: #6599cc; color: white;"%></p>
   	</table>
   	<table class="orders">
-  		<p><strong>注文履歴</strong> &emsp; <%= link_to "一覧を見る",orders_path,class: "btn btn-primary" %></p>
+  		<p><strong>注文履歴</strong> &emsp; <%= link_to "一覧を見る",orders_path, class: "btn mt-3", style: "background-color: #6599cc; color: white;" %></p>
   	</table>
 </div>
 

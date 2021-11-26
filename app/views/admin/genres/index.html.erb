@@ -1,17 +1,13 @@
-<div class="container">
-  <div class="row">
-    <div class="col-xs-12">
-      <h2 class="head-line title_h2 text-center">ジャンル一覧・追加</h2>
+<div class="container mt-3 mb-3" style="font-family: 'Noto Sans JP',serif;">
+  <h2>ジャンル一覧・追加</h2>
         <%= form_for @genre, :url => {:action => :create} do |f| %>
           <%= render "layouts/error_messages", resource: @genre %>
-          <div class="col-xs-offset-1">
             <i class="fas fa-candy-cane"></i>ジャンル
             <%= f.text_field :name  %>
             <%= f.submit "追加", class: "btn btn-info" %>
-          </div>
         <% end %>
-      <div class="col-xs-8 col-xs-offset-2">
-        <table class="table table-hover table-inverse table-bordered">
+      <div class="row md-3 mt-3">
+        <table class="table table-hover table-inverse table-bordered col-md-8 mx-auto">
           <thead>
             <tr class="info">
               <th>ジャンル</th>
@@ -27,8 +23,7 @@
             <% end %>
           </tbody>
         </table>
-      </div>
     </div>
-    <div class= "text-center"><%= paginate(@genres) %></div>
   </div>
+  <div class= "text-center"><%= paginate(@genres) %></div>
 </div>

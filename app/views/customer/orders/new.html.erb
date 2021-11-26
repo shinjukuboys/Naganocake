@@ -10,9 +10,9 @@
         <% end %>
       </div>
       <h2>注文情報入力</h2>
+      <%= form_with model: @order,url: check_orders_path, method: :post, local: true do |f| %>
       <div class="mt-5">
         <p>支払い方法</p>
-        <%= form_with model: @order,url: check_orders_path, method: :post, local: true do |f| %>
         <%= f.radio_button :payment_method, "credit_card" %>
         <%= f.label :payment_method, "クレジットカード" %>
 
@@ -27,7 +27,7 @@
         <%= f.radio_button :addresses, 0, checked: true %>
         <%= f.label :addresses, "ご自身の住所", value: 0,class: "col-sm-3 control-label"%>
         〒<%= current_customer.postal_code %>　<%= current_customer.address %>
-        <%= current_customer.last_name %><%= current_customer.first_name %>
+        <%= current_customer.first_name %><%= current_customer.last_name %>
       </div>
       <div>
         <%= f.radio_button :addresses, 1 %>
@@ -50,8 +50,10 @@
         <%= f.label :new_address, "宛名",class: "col-sm-3 control-label"%>
         <%= f.text_field :name, :placeholder => "令和道子" %>
       </div>
-      <%= f.submit "確認画面に進む", class: "btn mt-5", style: "background-color: #cbb05e; color: black;" %>
-      <% end %>
+      <div>
+        <%= f.submit "確認画面に進む", class: "btn mt-5", style: "background-color: #cbb05e; color: black;" %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
